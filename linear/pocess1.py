@@ -17,9 +17,8 @@ class Pocess1Test(unittest.TestCase):
         self.driver.find_element(By.NAME, "password").send_keys('123456') #输入密码
         self.driver.find_element(By.NAME,"submit").click()  #点击登录
         sleep(2)
-        self.driver.find_element(By.CSS_SELECTOR, "#searchForm > div > ul.list0.pull-right > li:nth-child(2) > input").send_keys('xiaodeng')
+        self.driver.find_element(By.CSS_SELECTOR, "#searchForm > div > ul.list0.pull-right > li:nth-child(2) > input").send_keys('xiaodeng')  #输入用户名查询动态信息
         sleep(2)
-        #输入用户名查询动态信息
         self.driver.find_element(By.CSS_SELECTOR,"#searchBtn").click()  #点击查询
         sleep(2)
         self.driver.find_element(By.CSS_SELECTOR,"body > div.container > div.row > div.span3.knowledgecate > div > div.dynamiccate > ul:nth-child(1) > li:nth-child(1) > a").click() #点击全部
