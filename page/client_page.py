@@ -10,10 +10,20 @@ from page.base_page import BasePage
 from page.home_page import HomePage
 
 class NewClient(BasePage):
-    new_client_locator = (By.CSS_SELECTOR,'body > div.container > div.row > div:nth-child(1) > div > a')  #新建客户按钮定位
-    client_locator = (By.ID,'name')    #客户名称输入框定位
-    submit_locator = (By.NAME,'submit')  #保存按钮定位
-    assert_locator = (By.XPATH,'//*[@id="form1"]/table/tbody/tr[1]/td[3]/a/span')  #断言客户名称定位
+    """【新建客户】按钮定位"""
+    new_client_locator = (By.CSS_SELECTOR,'body > div.container > div.row > div:nth-child(1) > div > a')
+    """客户名称输入框定位"""
+    client_locator = (By.ID,'name')
+    """【保存】按钮定位"""
+    submit_locator = (By.NAME,'submit')
+    """定位【查看】"""
+    check_locator = (By.LINK_TEXT,'查看')
+    """定位【修改】"""
+    alter_locator = (By.LINK_TEXT,'修改')
+
+
+    """断言客户名称定位"""
+    assert_locator = (By.XPATH,'//*[@id="form1"]/table/tbody/tr[1]/td[3]/a/span')
 
     def click_new_client(self):  #点击新建客户按钮
         hp = HomePage(self.driver)

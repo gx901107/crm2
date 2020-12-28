@@ -16,3 +16,6 @@ class BasePage():
 
     def find_element(self,locator):
         return self.driver.find_element(*locator)
+
+    def switch_to(self):
+        return self.driver.switch_to.alert.accept()

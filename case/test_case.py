@@ -12,15 +12,16 @@ from case.base_case import BaseCase
 from page.clue_page import NEWClue
 from page.client_page import NewClient
 from model.read_datas import read_login_excel, read_clue_excel, read_client_excel, read_opportunity_excel
-
+from page.clue_pond_page import NEWCluePond
 
 class MyTest(BaseCase):
 
     def test_1(self):
-        clue, expected = read_clue_excel()[1]
-        nc = NEWClue(self.driver)
-        nc.add_clue(clue)
-        sleep(2)
+        NEWCluePond(self.driver).clue_pond_flow()
+        # clue, expected = read_clue_excel()[1]
+        # nc = NEWClue(self.driver)
+        # nc.add_clue(clue)
+        # sleep(3)
 
         # clue_text = nc.assert_text()
         # self.assertEqual(expected, clue_text, '添加失败')
