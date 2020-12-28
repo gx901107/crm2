@@ -37,14 +37,7 @@ class Pocess2Test(unittest.TestCase):
         sleep(3)
         self.driver.find_element(By.CSS_SELECTOR, "#tab1 > div.container2.top-pad > div > a:nth-child(2)").click() #点击删除
         sleep(4)
-        # self.driver.find_element(By.CSS_SELECTOR, "")
-        #
-        # self.driver.find_element(By.CSS_SELECTOR, "")
-        # self.driver.find_element(By.CSS_SELECTOR, "")
-        #
-        #
-        #
-        # self.driver.find_element(By.CSS_SELECTOR, "")
+
 
     def tearDown(self) -> None:
         self.driver.quit()
