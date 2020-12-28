@@ -12,10 +12,18 @@ from page.home_page import HomePage
 
 
 class NEWClue(BasePage):
-    new_clue_locator = (By.CSS_SELECTOR, 'body > div.container > div.row > div:nth-child(1) > div > a')  #新建线索按钮定位
-    linkman_locator = (By.ID, 'contacts_name')  #联系人输入框定位
-    sbmit_locator = (By.CSS_SELECTOR, '#form1 > table > tfoot > tr > td > input:nth-child(1)')  #保存按钮定位
-    assert_locator = (By.XPATH,'//*[@id="form1"]/table/tbody/tr[1]/td[3]/span') #断言联系人姓名
+    """新建线索按钮定位"""
+    new_clue_locator = (By.CSS_SELECTOR, 'body > div.container > div.row > div:nth-child(1) > div > a')
+    """联系人输入框定位"""
+    linkman_locator = (By.ID, 'contacts_name')
+    """保存按钮定位"""
+    sbmit_locator = (By.CSS_SELECTOR, '#form1 > table > tfoot > tr > td > input:nth-child(1)')
+    """定位查看"""
+    check_locator = (By.LINK_TEXT,'查看')
+    """定位修改"""
+    amend_locator = (By.LINK_TEXT,'修改')
+    """断言联系人姓名"""
+    assert_locator = (By.XPATH,'//*[@id="form1"]/table/tbody/tr[1]/td[3]/span')
 
     def click_new_clue(self):  #点击新建线索
         hp=HomePage(self.driver)
@@ -28,12 +36,18 @@ class NEWClue(BasePage):
     def click_sbmit(self):   #点击保存
         self.find_element(self.sbmit_locator).click()
 
-    def assert_text(self):
+    def click_check(self):  #点击查看
+        self.find_element(self.check_locator).click()
+
+    def assert_text(self):  #获取断言文本
         return self.find_element(self.assert_locator).text
 
-    def add_clue(self,linkman):   #添加线索过程
+    def add_clue(self,linkman):   #添加线索 - 查看 - 修改 -
         sleep(2)
         self.click_new_clue()
         sleep(2)
         self.input_linkman(linkman)
         self.click_sbmit()
+        sleep(2)
+        self.click_check()
+
