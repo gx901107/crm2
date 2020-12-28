@@ -6,7 +6,7 @@
 # @Project : crm自动化测试
 from selenium.webdriver.common.by import By
 from page.base_page import BasePage
-from page.login_page import LoginPage
+
 
 
 class HomePage(BasePage):
