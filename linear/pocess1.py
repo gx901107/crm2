@@ -33,24 +33,20 @@ class Pocess1Test(unittest.TestCase):
         sleep(2)
         self.driver.find_element(By.CSS_SELECTOR,"body > div.container > div.row > div.span3.knowledgecate > div > div.personal-panel > div:nth-child(2) > p:nth-child(4) > a:nth-child(1)").click() #点击我的任务
         self.driver.find_element(By.XPATH, "/html/body/div[5]/p/a[1]").click() #点击全部
-
         sleep(1)
         self.driver.find_element(By.CSS_SELECTOR, "#form1 > table > tbody > tr > td:nth-child(10) > a:nth-child(1)").click() #点击查看任务
         sleep(4)
         self.driver.find_element(By.CSS_SELECTOR,'a[onclick="javascript:history.go(-1)"]').click() #点击返回
         sleep(2)
         self.driver.find_element(By.CSS_SELECTOR, "#form1 > table > tbody > tr > td:nth-child(1) > input").click() #勾选第一个任务
-
         sleep(5)
         self.driver.find_element(By.CSS_SELECTOR, "#delete").click() #点击删除
         sleep(2)
-
          #获取alert文本
         #self.driver.switch_to.alert.text
         sleep(3)
         self.driver.switch_to.alert.accept() #点击确定
         sleep(5)
-
     def tearDown(self) -> None:
         self.driver.quit()
 

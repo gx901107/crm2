@@ -31,6 +31,7 @@ class Pocess3Test(unittest.TestCase):
         sleep(2)
         self.driver.find_element(By.CSS_SELECTOR, "#calendar > div.c-event-grid > div.c-task-body > div.data-head > a > i").click() #点击快捷添加任务
         sleep(2)
+
         self.driver.find_element(By.CSS_SELECTOR, "#subject").send_keys("小油油研究所")#输入主题
         sleep(2)
         self.driver.find_element(By.CSS_SELECTOR, "#owner_name").click() #点击负责人，弹出负责人选择窗口
@@ -50,7 +51,7 @@ class Pocess3Test(unittest.TestCase):
         sleep(2)
         self.driver.find_element(By.CSS_SELECTOR, "#calendar > div.c-event-grid > div.c-event-body > div.data-head > a > i").click() #点击快速添加日程
         sleep(2)
-        self.driver.find_element(By.CSS_SELECTOR, "#subject").send_keys("员工满意度调查")
+        self.driver.find_element(By.CSS_SELECTOR, "#subject").send_keys("员工满意度调查") #输入主题名
         sleep(2)
         self.driver.find_element(By.CSS_SELECTOR, "body > div.container > div.row > div > form > table > tfoot > tr > td:nth-child(2) > input:nth-child(1)").click() #点击保存
         sleep(2)
@@ -62,6 +63,7 @@ class Pocess3Test(unittest.TestCase):
         sleep(2)
         self.driver.find_element(By.CSS_SELECTOR, "#widgets > div > div:nth-child(6) > div > div.dash-title > a").click() #点击切换到公告列表
         sleep(2)
+
         self.driver.find_element(By.CSS_SELECTOR, "body > div.container > div.row > div:nth-child(1) > div.pull-right > a").click() #点击添加公告
         sleep(2)
         self.driver.find_element(By.CSS_SELECTOR, "body > div.container > div.row > div > form > table > tbody > tr:nth-child(2) > td:nth-child(2) > input").send_keys("优秀员工评选") #输入标题

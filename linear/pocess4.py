@@ -44,6 +44,7 @@ class Pocess3Test(unittest.TestCase):
         self.driver.find_element(By.CSS_SELECTOR,
                                  "body > div.navbar.navbar-inverse.navbar-fixed-top > div > div > div.nav-collapse.collapse > ul.nav.pull-right > li.dropdown.open > ul > li:nth-child(4) > a").click()  # 点击组织架构
         sleep(2)
+
         self.driver.find_element(By.CSS_SELECTOR, "#add_role").click()  # 点击添加岗位
         sleep(2)
         self.driver.find_element(By.CSS_SELECTOR, "#role_add > div:nth-child(1) > div > input").send_keys(
@@ -57,6 +58,7 @@ class Pocess3Test(unittest.TestCase):
         self.driver.find_element(By.CSS_SELECTOR,
                                  "body > div.navbar.navbar-inverse.navbar-fixed-top > div > div > div.nav-collapse.collapse > ul.nav.pull-right > li.dropdown.open > ul > li:nth-child(7) > a").click()  # 点击操作日志
         sleep(2)
+
         self.driver.find_element(By.CSS_SELECTOR,
                                  "body > div.container > div.row > div.span2.knowledgecate > ul > li:nth-child(2) > a").click()  # 按日志类型查看 点击全部
         sleep(2)
