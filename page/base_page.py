@@ -29,4 +29,11 @@ class BasePage():
         return self.driver.find_elements(*locator)
 
     def switch_to(self):
-        return self.driver.switch_to.alert.accept()
+        self.driver.switch_to.alert.accept()
+    def switch_dissmiss(self):
+        self.driver.switch_to.alert.dismiss()
+    def switchparent_frame(self):
+        self.driver.switch_to.parent_frame()
+    def switch_frame(self,frame):
+        self.driver.switch_to.frame(frame)
+
