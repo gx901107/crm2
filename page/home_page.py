@@ -140,11 +140,11 @@ class HomePage(BasePage):
         self.response_input(response)
         self.comment_submit()
         self.my_schedule_submit()
-    def homepage2(self,mnane):
+    def homepage2(self,mname):
         '''仪表盘-添加组件-点击添加问题'''
         self.dash_board_submit()
         self.add_module_submit()
-        self.module_name_input(mnane)
+        self.module_name_input(mname)
         self.select_module()
         self.save_submit()
         self.add_task_submit()
