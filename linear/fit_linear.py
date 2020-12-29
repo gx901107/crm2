@@ -17,9 +17,12 @@ opportunity_locator = (By.CSS_SELECTOR, 'body > div.navbar.navbar-inverse.navbar
 driver.find_element(*username_locator).send_keys('xiaoyang')
 driver.find_element(*password_locator).send_keys('123456')
 driver.find_element(*submit_locator).click()
-
-
-
+sleep(2)
+driver.find_element(*clue_locator).click()
+sleep(1)
+driver.find_element(By.LINK_TEXT,'查看').click()
+sleep(1)
+driver.find_element(By.LINK_TEXT,'修改').click()
 
 sleep(4)
 driver.quit()
