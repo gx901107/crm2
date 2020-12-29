@@ -116,8 +116,6 @@ class OrPage(BasePage):
         for tr in tr_list:
             td_list = tr.find_elements(self.td_locator)
             if td_list[1].text.strip() == "小杨":
-                print(td_list[1].text)
-                sleep(1)
                 td_list[7].find_elements_by_tag_name('a')[0].click()
                 sleep(3)
                 driver.find_element(*wuser_locator).click()

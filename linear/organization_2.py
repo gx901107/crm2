@@ -27,11 +27,11 @@ driver.find_element_by_css_selector("[class='avatar']").click()  # 点击头像
 sleep(3)
 origanization_locator = (By.LINK_TEXT, '组织架构')  # 组织架构的定位器
 driver.find_element(*origanization_locator).click()  # 点击组织架构
-sleep(3)
-origanization_locator2 = (By.LINK_TEXT, '组织架构')  # 进入组织架构之后的组织架构定位器
-driver.find_element(*origanization_locator2).click()
-sleep(6)
-"""编辑部门"""
+# sleep(3)
+# origanization_locator2 = (By.LINK_TEXT, '组织架构')  # 进入组织架构之后的组织架构定位器
+# driver.find_element(*origanization_locator2).click()
+# sleep(6)
+# """编辑部门"""
 # huabei_locator = (By.XPATH, '//*[@id="browser"]/li[2]/ul/li[2]/ul/li[2]/span')  # 华北销售部定位器
 # locator = driver.find_element(*huabei_locator)
 # action = ActionChains(driver)
@@ -64,7 +64,7 @@ sleep(6)
 # driver.find_element(*delete_locator).click()
 # sleep(3)
 # driver.switch_to.alert.accept()
-"""编辑岗位"""
+# """编辑岗位"""
 # salesspecialist_locator = (By.XPATH, '//*[@id="browser"]/li/ul/li[3]/ul/li[2]/ul/li/ul/li/span')#销售专员定位器
 #
 # relations_locator = (By.LINK_TEXT, '上下级关系图')  # 上下关系图定位器
@@ -109,6 +109,16 @@ driver.find_element(*searchuser_locator).click()#点击按类别查找
 sleep(1)
 driver.find_element(*user_locator).click()#点击员工
 sleep(3)
-driver.quit()
-
+aserttable_locator=(By.CSS_SELECTOR,'#user_form > div:nth-child(2) > table > tbody')
+tr_locator=(By.TAG_NAME,'tr')
+td_locator=(By.TAG_NAME,'td')
+aa=driver.find_element(*aserttable_locator)
+tr_list=aa.find_elements(*tr_locator)
+print(tr_list)
+lit=[]
+for tr in tr_list:
+    td_list=tr.find_elements(*td_locator)
+    print(type(td_list[1].text))
+    lit.append(td_list[1].text)
+print(len(lit))
 

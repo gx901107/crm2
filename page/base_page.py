@@ -29,7 +29,6 @@ class BasePage():
         return self.driver.find_elements(*locator)
 
     def switch_to(self):
-<<<<<<< HEAD
         self.driver.switch_to.alert.accept()
     def switch_dissmiss(self):
         self.driver.switch_to.alert.dismiss()
@@ -37,6 +36,4 @@ class BasePage():
         self.driver.switch_to.parent_frame()
     def switch_frame(self,frame):
         self.driver.switch_to.frame(frame)
-=======
-        return self.driver.switch_to.alert.accept()
->>>>>>> cd23496541fbc6cee289ee24550b59ef2965e2ef
+

@@ -49,31 +49,31 @@ sleep(3)
 driver.find_element(*origanization_locator).click()  # 点击组织架构
 sleep(3)
 """添加部门"""
-# driver.find_element(*adddepartment_locator).click()  # 点击添加部门
-# sleep(3)
-# driver.find_element(*departmentname_locator).send_keys('人事部')  # 输入部门名称
-# sleep(2)
-# locatot = driver.find_element(*uperiordepartment_locator)
-# select = Select(locatot)
-# select.select_by_visible_text('--卡卡罗特分公司（深圳）')
-# sleep(3)
-# driver.find_element(*departmentnamedescription_locator).send_keys('负责人事方面工作')
-# sleep(2)
-# driver.find_element(*confirm_locator).click()#点击确定按钮
+driver.find_element(*adddepartment_locator).click()  # 点击添加部门
+sleep(3)
+driver.find_element(*departmentname_locator).send_keys('人事部')  # 输入部门名称
+sleep(2)
+locatot = driver.find_element(*uperiordepartment_locator)
+select = Select(locatot)
+select.select_by_visible_text('--卡卡罗特分公司（深圳）')
+sleep(3)
+driver.find_element(*departmentnamedescription_locator).send_keys('负责人事方面工作')
+sleep(2)
+driver.find_element(*confirm_locator).click()#点击确定按钮
 """"添加岗位"""
-# sleep(3)
-# driver.find_element(*addrole_locator).click()  # 点击添加岗位
-# sleep(3)
-# driver.find_element(*rolename_locator).send_keys('测试工程师组长')  # 添加岗位名称
-# sleep(3)
-# locator_element = Select(driver.find_element(*fordepartment_locator)).select_by_visible_text('----技术研发部')  # 选择所属部门
-# sleep(3)
-# parent_element = Select(driver.find_element(*parent_locator)).select_by_visible_text(' --  -- 技术研发部 | 高级工程师')  # 选择上级岗位
-# sleep(3)
-# driver.find_element(*roledescription_locator).send_keys('负责软件质量')  # 填写岗位描述
-# sleep(3)
-# driver.find_element(*roleconfirm_locator).click()  # 点击添加岗位确定按钮
-# sleep(3)
+sleep(3)
+driver.find_element(*addrole_locator).click()  # 点击添加岗位
+sleep(3)
+driver.find_element(*rolename_locator).send_keys('测试工程师组长')  # 添加岗位名称
+sleep(3)
+locator_element = Select(driver.find_element(*fordepartment_locator)).select_by_visible_text('----技术研发部')  # 选择所属部门
+sleep(3)
+parent_element = Select(driver.find_element(*parent_locator)).select_by_visible_text(' --  -- 技术研发部 | 高级工程师')  # 选择上级岗位
+sleep(3)
+driver.find_element(*roledescription_locator).send_keys('负责软件质量')  # 填写岗位描述
+sleep(3)
+driver.find_element(*roleconfirm_locator).click()  # 点击添加岗位确定按钮
+sleep(3)
 """查看和编辑员工信息"""
 wuser_locator=(By.CSS_SELECTOR,'#tab1 > table > thead > tr > td > p > a:nth-child(3)')#查看中的编辑定位器
 wemail_locator=(By.NAME,'email')#邮箱的定位器
@@ -92,7 +92,7 @@ for tr in tr_list:
         print(td_list[1].text)
         sleep(1)
         td_list[7].find_elements_by_tag_name('a')[0].click()
-        sleep(3)
+        sleep(4)
         driver.find_element(*wuser_locator).click()
         sleep(1)
         driver.find_element(*wemail_locator).clear()
