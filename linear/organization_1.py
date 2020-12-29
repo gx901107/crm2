@@ -74,26 +74,37 @@ sleep(3)
 # sleep(3)
 # driver.find_element(*roleconfirm_locator).click()  # 点击添加岗位确定按钮
 # sleep(3)
-"""添加员工"""
-driver.find_element(*adduser_locator).click()#点击添加员工
-sleep(7)
-aa=driver.find_element(*addusername_locator)
-aa.send_keys('小刘')
-# sleep(3)
-# aa.send_keys('小刘')#输入添加员工的姓名
-sleep(3)
-driver.find_element(*userpassword_locator).send_keys('123456')#输入添加员工的密码
-sleep(3)
-bb=driver.find_element(*categoryid_locator)
-sleep(3)
-Select(bb).select_by_visible_text('员工')#选择用户类型为
-sleep(3)
-cc=driver.find_element(*uperiordepartment_locator)
-sleep(3)
-Select(cc).select_by_visible_text('人事部')#选择员工所属部门
-sleep(3)
-dd=driver.find_element(*rolename2_locator)
-sleep(3)
-Select(dd).select_by_visible_text('人事部经理')#选择员工岗位
-sleep(3)
-driver.find_element(*savebotton_locator).click()#点击[添加按钮]
+"""查看和编辑员工信息"""
+wuser_locator=(By.CSS_SELECTOR,'#tab1 > table > thead > tr > td > p > a:nth-child(3)')#查看中的编辑定位器
+wemail_locator=(By.NAME,'email')#邮箱的定位器
+wphone_locator=(By.NAME,'telephone')#电话的定位器
+wuserconfirm_locator=(By.CSS_SELECTOR,'body > div.container > div.row > div:nth-child(2) >'
+    ' form > table > tfoot > tr > td:nth-child(2) > input.btn.btn-primary')#编辑员工信息保存按钮
+usertable_locator=(By.CSS_SELECTOR,'#user_form > div:nth-child(2) > table > tbody')#用户列表tbody
+tr_locator=(By.TAG_NAME,'tr')
+td_locator=(By.TAG_NAME,'td')
+userdepartment_element=driver.find_element(*usertable_locator)
+tr_list=userdepartment_element.find_elements(*tr_locator)
+for tr in tr_list:
+    td_list=tr.find_elements(*td_locator)
+    print(td_list[1].text)
+    if td_list[1].text.strip()=="小杨":
+        print(td_list[1].text)
+        sleep(1)
+        td_list[7].find_elements_by_tag_name('a')[0].click()
+        sleep(3)
+        driver.find_element(*wuser_locator).click()
+        sleep(1)
+        driver.find_element(*wemail_locator).clear()
+        driver.find_element(*wemail_locator).send_keys('1234567@qq.com')
+        sleep(1)
+        driver.find_element(*wphone_locator).clear()
+        driver.find_element(*wphone_locator).send_keys('18782968888')
+        sleep(1)
+        driver.find_element(*wuserconfirm_locator).click()
+        sleep(1)
+        break
+
+
+
+
