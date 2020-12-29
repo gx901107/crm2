@@ -27,6 +27,7 @@ class Pocess2Test(unittest.TestCase):
         sleep(2)
         self.driver.find_element(By.CSS_SELECTOR, "body > div.container > div.row > div.span3.knowledgecate > div > div.personal-panel > div:nth-child(2) > p:nth-child(4) > a:nth-child(2)").click() #点击我的日程
         sleep(2)
+
         self.driver.find_element(By.CSS_SELECTOR, "body > div.container > div.row > div:nth-child(1) > div > a").click() #点击新建日程
         sleep(2)
         self.driver.find_element(By.CSS_SELECTOR, "#subject").send_keys('董事会')  #输入主题
