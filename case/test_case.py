@@ -16,21 +16,21 @@ from page.clue_pond_page import NEWCluePond
 
 class MyTest(BaseCase):
 
-    def test_1(self):
-        NEWCluePond(self.driver).clue_pond_flow()
-        # clue, expected = read_clue_excel()[1]
-        # nc = NEWClue(self.driver)
-        # nc.add_clue(clue)
-        # sleep(3)
+    # def test_1(self):
+    #     NEWCluePond(self.driver).clue_pond_flow()
+    #     clue, expected = read_clue_excel()[1]
+    #     nc = NEWClue(self.driver)
+    #     nc.add_clue(clue)
+    #     sleep(3)
 
         # clue_text = nc.assert_text()
         # self.assertEqual(expected, clue_text, '添加失败')
 
-    # def test_2(self):
-    #     client, expected = read_client_excel()[3]
-    #     ncl = NewClient(self.driver)
-    #     ncl.add_client(client)
-    #     sleep(2)
+    def test_2(self):
+        client, expected = read_client_excel()[14]
+        ncl = NewClient(self.driver)
+        ncl.add_client(client,client)
+        sleep(6)
     #
     #     clien_text = ncl.assert_text()
     #     self.assertEqual(client, clien_text, '添加失败')
