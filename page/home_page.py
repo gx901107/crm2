@@ -20,7 +20,6 @@ class HomePage(BasePage):
                       'body > div.navbar.navbar-inverse.navbar-fixed-top > div > div > div.nav-collapse.collapse > ul:nth-child(1) > li:nth-child(2) > a')  # 定位客户
     opportunity_locator = (By.CSS_SELECTOR,
                            'body > div.navbar.navbar-inverse.navbar-fixed-top > div > div > div.nav-collapse.collapse > ul:nth-child(1) > li:nth-child(3) > a')  # 定位商机
-
     searchform_locator = (
     By.CSS_SELECTOR, '#searchForm > div > ul.list0.pull-right > li:nth-child(2) > input')  # 输入查询用户名
     searchbtn_locator = (By.CSS_SELECTOR, '#searchBtn')  # 查询按钮
@@ -69,8 +68,11 @@ class HomePage(BasePage):
                                         'body > div.navbar.navbar-inverse.navbar-fixed-top > div > div > div.nav-collapse.collapse > ul.nav.pull-right > li.dropdown.open > ul > li:nth-child(4) > a')  # 组织架构
     operation_log_locator = (By.CSS_SELECTOR,
                              'body > div.navbar.navbar-inverse.navbar-fixed-top > div > div > div.nav-collapse.collapse > ul.nav.pull-right > li.dropdown.open > ul > li:nth-child(7) > a')  # 操作日志
-
-
+    task_name_locator = (By.CSS_SELECTOR,'#subject') #输入任务主题名
+    principal_locator = (By.CSS_SELECTOR, '#owner_name') #点击负责人
+    check_principal_locator = (By.CSS_SELECTOR, '#ta1 > span:nth-child(4) > input') #勾选一个负责人
+    ok_locator = (By.CSS_SELECTOR, 'body > div:nth-child(12) > div.ui-dialog-buttonpane.ui-widget-content.ui-helper-clearfix > div > button:nth-child(1) > span') #点击ok
+    save_task_locator = (By.CSS_SELECTOR, 'body > div.container > div.row-fluid > div > form > table > tfoot > tr > td:nth-child(2) > input:nth-child(1)')  #点击保存
     def log_element(self):
         self.find_element(self.log_locator).click()  # 点击日志
 
@@ -139,7 +141,7 @@ class HomePage(BasePage):
         self.find_element(self.add_module_locator).click()
 
     def module_name_input(self, mname):  # 输入组件名
-        self.find_element(self.module_name_locator).click(mname)
+        self.find_element(self.module_name_locator).send_keys(mname)
 
     def select_module(self):
         locator = self.driver.find_element(By.CSS_SELECTOR, "#widget")  # 定位选择组件
@@ -190,7 +192,16 @@ class HomePage(BasePage):
 
     def alert_submit(self):  # 确定警告框
         self.driver.switch_to.alert.accept()
-
+    def task_name_input(self,tname):  #输入主题
+        self.find_element(self.task_name_locator).send_keys(tname)
+    def principal_submit(self):  #点击负责人
+        self.find_element(self.principal_locator).click()
+    def check_principal_submit(self):  #勾选一个负责人
+        self.find_element(self.check_principal_locator).click()
+    def ok_submit(self):  #点击ok
+        self.find_element(self.ok_locator).click()
+    def save_task_submit(self): #点击保存任务
+        self.find_element(self.save_task_locator).click()
     def homepage(self, searchform):
         '''查询用户日志动态信息-翻页-我的任务'''
         self.searchform_input(searchform)
@@ -211,15 +222,32 @@ class HomePage(BasePage):
         self.comment_submit()
         self.my_schedule_submit()
 
-    def homepage2(self,mname):
-        '''仪表盘-添加组件-点击添加问题'''
+    def homepage2(self,mname,tname,name):
+        '''仪表盘-添加组件-点击添加任务'''
         self.dash_board_submit()
         self.add_module_submit()
         self.module_name_input(mname)
         self.select_module()
         self.save_submit()
         self.add_task_submit()
-
+        sleep(3)
+        self.task_name_input(tname)
+        sleep(2)
+        self.principal_submit()
+        sleep(2)
+        self.check_principal_submit()
+        sleep(1)
+        self.ok_submit()
+        sleep(2)
+        self.save_task_submit()
+        self.wukong_submit()
+        self.dash_board_submit()
+        self.add_schedule_submit()
+        self.schedule_name_input(name)
+        self.save_schedule_submit()
+        self.wukong_submit()
+        self.dash_board_submit()
+        self.affiche_list_submit()
     def homepage3(self, email, phone):
         '''点击头像-个人资料-修改个人资料-点击组织架构'''
         self.head_portrait()
@@ -229,6 +257,3 @@ class HomePage(BasePage):
         self.save_data_submit()
         self.head_portrait()
         self.organizational_structure_submit()
-
-
-
