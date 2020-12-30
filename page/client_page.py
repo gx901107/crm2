@@ -49,10 +49,10 @@ class NewClient(BasePage):
         self.find_element(self.new_client_locator).click()
 
     def input_client(self, clientname):  # 输入客户名
-        cl = self.find_element(self.client_locator)
-        # cl.clear()
-        # sleep(1)
-        cl.send_keys(clientname)
+        self.find_element(self.client_locator).send_keys(clientname)
+
+    def click_clear(self):  # 清楚
+        self.find_element(self.client_locator).clear()
 
     def click_submit(self):  # 点击保存
         self.find_element(self.submit_locator).click()
@@ -84,7 +84,7 @@ class NewClient(BasePage):
         for tr in tr_list:
             td_list = self.find_elements(self.td_locator, tr)
             # print(td_list[2].text)
-            if td_list[2].text == clientname1 + '北京东兴阳工程技术有限公司':
+            if td_list[2].text == clientname1:
                 self.find_element(self.select_locator, td_list[0]).click()
                 break
 
@@ -104,12 +104,15 @@ class NewClient(BasePage):
         self.input_client(clientname)  # 输入客户名称
         sleep(1)
         self.click_submit()  # 点击【保存】
-        sleep(3)
-        self.click_check(clientname1)  # 点击【查看】
-        sleep(5)
+        sleep(1)
+        self.click_check(clientname)  # 点击【查看】
+        sleep(1)
         self.click_alter()  # 点击【修改】
         sleep(1)
-        self.input_client('北京东兴阳工程技术有限公司')  # 修改信息
+        self.click_clear()
+        sleep(1)
+        self.switch_to()
+        self.input_client(clientname1)  # 修改信息
         sleep(1)
         self.click_submit()  # 点击确定
         sleep(1)

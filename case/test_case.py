@@ -9,6 +9,7 @@
 import unittest
 from time import sleep
 from case.base_case import BaseCase
+from page.client_pond_page import NewClientPond
 from page.clue_page import NEWClue
 from page.client_page import NewClient
 from model.read_datas import read_login_excel, read_clue_excel, read_client_excel, read_opportunity_excel
@@ -27,10 +28,15 @@ class MyTest(BaseCase):
         # self.assertEqual(expected, clue_text, '添加失败')
 
     def test_2(self):
-        client, expected = read_client_excel()[14]
-        ncl = NewClient(self.driver)
-        ncl.add_client(client,client)
-        sleep(6)
+        client, expected = read_client_excel()[27]
+        ncp = NewClientPond(self.driver)
+        ncp.client_pond_flow(client,expected)
+        # ncl = NewClient(self.driver)
+        # ncl.add_client(client,expected)
+        sleep(5)
+        txt = ncp.assert_text()  #获取文本【分配成功！】
+
+        print(txt)
     #
     #     clien_text = ncl.assert_text()
     #     self.assertEqual(client, clien_text, '添加失败')
