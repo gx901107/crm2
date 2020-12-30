@@ -7,9 +7,7 @@
 from selenium.webdriver.common.by import By
 from page.base_page import BasePage
 from selenium.webdriver.support.select import Select
-
-
-
+from time import sleep
 class HomePage(BasePage):
     '''首页定位器'''
     _url = BasePage._url + '/crm/index.php?m=leads'
@@ -26,10 +24,10 @@ class HomePage(BasePage):
     last_page_locator =(By.CSS_SELECTOR,'body > div.container > div.row > div.span9 > div > div.pagination > div.span4 > div > ul > li:nth-child(5) > a') #末页
     home_page_locator =(By.CSS_SELECTOR,'body > div.container > div.row > div.span9 > div > div.pagination > div.span4 > div > ul > li:nth-child(1) > a') #首页
     my_task_locator =(By.CSS_SELECTOR,'body > div.container > div.row > div.span3.knowledgecate > div > div.personal-panel > div:nth-child(2) > p:nth-child(4) > a:nth-child(1)') #我的任务
-    crm_locator = (By.CSS_SELECTOR, '#searchForm > div > ul.list0.pull-left > li:nth-child(3) > a') #crm动态
-    revert_locator = (By.CSS_SELECTOR, '#anchor_42 > div:nth-child(4) > a') #回复
-    response_locator = (By.CSS_SELECTOR, '#content_42') #输入回复内容
-    comment_locator = (By.CSS_SELECTOR, '#reply_42 > div > input.btn.btn-primary.submit') #点击评论
+    log_locator = (By.CSS_SELECTOR, '#searchForm > div > ul.list0.pull-left > li:nth-child(2) > a') #日志动态
+    revert_locator = (By.XPATH, '//*[@id="anchor_343"]/div[4]/a') #回复
+    response_locator = (By.CSS_SELECTOR, '#content_343') #输入回复内容
+    comment_locator = (By.CSS_SELECTOR, '#reply_343 > div > input.btn.btn-primary.submit') #点击评论
     my_schedule_locator = (By.CSS_SELECTOR, 'body > div.container > div.row > div.span3.knowledgecate > div > div.personal-panel > div:nth-child(2) > p:nth-child(4) > a:nth-child(2)') #我的日程
     dash_board_locator = (By.CSS_SELECTOR, 'body > div.container > div.page-header > ul > li:nth-child(2) > a') #仪表盘
     add_module_locator = (By.CSS_SELECTOR, '#add') #添加组件
@@ -71,10 +69,10 @@ class HomePage(BasePage):
         self.find_element(self.home_page_locator).click()
     def my_task_submit(self): #点击我的任务
         self.find_element(self.my_task_locator).click()
-    def crm_submit(self): #点击crm动态信息
-        self.find_element(self.crm_locator).click()
+    def log_submit(self): #点击日志动态信息
+        self.find_element(self.log_locator).click()
     def revert_submit(self): #点击回复
-        self.find_element(self.crm_locator).click()
+        self.find_element(self.revert_locator).click()
     def response_input(self,reponse):   #输入回复内容
         self.find_element(self.response_locator).send_keys(reponse)
     def comment_submit(self): #点击评论
@@ -135,7 +133,8 @@ class HomePage(BasePage):
         self.my_task_submit()
     def homepage1(self,response):
         '''选择看crm动态信息-回复日志动态-我的日程'''
-        self.crm_submit()
+        self.log_submit()
+        sleep(3)
         self.revert_submit()
         self.response_input(response)
         self.comment_submit()
