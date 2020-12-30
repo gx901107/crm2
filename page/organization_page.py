@@ -151,9 +151,9 @@ class OrganizationPage(BasePage):
         sleep(1)
         self.user_element()
     def aserttable_element(self):
-        tr_list= self.find_element(self.aserttable_locator).find_elements(self.tr_locator)
+        tr_list= self.find_element(self.aserttable_locator).find_elements(*self.tr_locator)
         lit=[]
         for tr in tr_list:
-            td_list = tr.find_elements(self.td_locator)
+            td_list = tr.find_elements(*self.td_locator)
             lit.append(td_list[1].text)
-        return str(len(lit))
+        return len(lit)
