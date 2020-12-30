@@ -29,7 +29,7 @@ class NEWClue(BasePage):
     """定位保存按钮"""
     submit_locator = (By.NAME, 'submit')
     """断言联系人姓名"""
-    assert_locator = (By.XPATH,'//*[@id="form1"]/table/tbody/tr[1]/td[3]/span')
+    assert_locator = (By.CSS_SELECTOR,'body > div.container > div.alert.alert-success')
 
     def click_new_clue(self):  #点击【新建线索】
         hp=HomePage(self.driver)
@@ -59,9 +59,11 @@ class NEWClue(BasePage):
         self.find_element(self.submit_locator).click()
 
     def assert_text(self):  #获取断言文本
-        return self.find_element(self.assert_locator).text
+        txt = self.find_element(self.assert_locator).text.strip()
+        return  txt.splitlines()[1]
 
-    def add_clue(self,linkman):   #添加线索 - 查看 - 修改 -
+
+    def add_clue(self,linkman,linkman1,client):   #添加线索 - 查看 - 修改 -
         sleep(2)
         self.click_new_clue()   #点击【添加线索】
         sleep(2)
@@ -72,13 +74,13 @@ class NEWClue(BasePage):
         sleep(1)
         self.click_amend()  #点击【修改】（线索详情页面）
         sleep(1)
-        self.input_linkman('张二')  #修改联系人名字
+        self.input_linkman(linkman1)  #修改联系人名字
         sleep(1)
         self.click_sbmit()  #点击【提交】
         sleep(1)
         self.click_change()  #点击【转换】
         sleep(1)
-        self.input_client('张二')
+        self.input_client(client)  #输入客户名
         sleep(1)
         self.click_submit()  #点击【保存】
 
