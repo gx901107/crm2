@@ -5,10 +5,7 @@
 # @File : client.py
 # @Project : crm自动化测试
 from time import sleep
-
 from selenium.webdriver.common.by import By
-
-from case.base_case import BaseCase
 from page.base_page import BasePage
 from page.home_page import HomePage
 
@@ -22,7 +19,7 @@ class NewClient(BasePage):
     """定位td标签"""
     td_locator = (By.TAG_NAME, 'td')
     """定位a标签"""
-    a_locator = (By.TAG_NAME,'a')
+    a_locator = (By.TAG_NAME, 'a')
     """定位【新建客户】按钮"""
     new_client_locator = (By.CSS_SELECTOR, 'body > div.container > div.row > div:nth-child(1) > div > a')
     """客户名称输入框定位"""
@@ -40,9 +37,9 @@ class NewClient(BasePage):
     """选择框定位"""
     select_locator = (By.CSS_SELECTOR, '#form1 > table > tbody > tr > td:nth-child(1) > input')
     """批量操作"""
-    batch_operation_locator = (By.CSS_SELECTOR,'body > div.container > div.row > div:nth-child(1) > ul > div > a')
+    batch_operation_locator = (By.CSS_SELECTOR, 'body > div.container > div.row > div:nth-child(1) > ul > div > a')
     """批量删除"""
-    batch_remove_locator = (By.LINK_TEXT,'批量删除')
+    batch_remove_locator = (By.LINK_TEXT, '批量删除')
     """断言客户名称定位"""
     assert_locator = (By.XPATH, '//*[@id="form1"]/table/tbody/tr[1]/td[3]/a/span')
 
@@ -60,16 +57,18 @@ class NewClient(BasePage):
     def click_submit(self):  # 点击保存
         self.find_element(self.submit_locator).click()
 
-    def click_check(self,clientname1):  # 点击查看
-        self.find_element(self.check_locator).click()
-        # element = self.find_element(self.table_locator)
-        # tr_list = self.find_elements(self.tr_locator,element)[2:]
-        # for tr in tr_list:
-        #     td_list = self.find_elements(self.td_locator,tr)
-        #     # print(td_list[11].text)
-        #
-        #     if td_list[2].text == clientname1:
-        #         self.find_elements(self.a_locator,td_list[11])[0].click()
+    def click_check(self, clientname1):  # 点击查看
+        # self.find_element(self.check_locator).click()
+        element = self.find_element(self.table_locator)
+        tr_list = self.find_elements(self.tr_locator, element)[2:]
+        for tr in tr_list:
+            td_list = self.find_elements(self.td_locator, tr)
+            # print(td_list[11].text)
+
+            if td_list[2].text == clientname1:
+                self.find_elements(self.a_locator, td_list[11])[0].click()
+                break
+
     def click_alter(self):  # 点击修改
         self.find_element(self.alter_locator).click()
 
@@ -86,11 +85,13 @@ class NewClient(BasePage):
             td_list = self.find_elements(self.td_locator, tr)
             # print(td_list[2].text)
             if td_list[2].text == clientname1 + '北京东兴阳工程技术有限公司':
-                self.find_element(self.select_locator,td_list[0]).click()
-    def click_batch_operation(self):   #点击批量操作
+                self.find_element(self.select_locator, td_list[0]).click()
+                break
+
+    def click_batch_operation(self):  # 点击批量操作
         self.find_element(self.batch_operation_locator).click()
 
-    def click_batch_Remove(self):   #点击批量删除
+    def click_batch_Remove(self):  # 点击批量删除
         self.find_element(self.batch_remove_locator).click()
         self.switch_to()
 
@@ -103,9 +104,9 @@ class NewClient(BasePage):
         self.input_client(clientname)  # 输入客户名称
         sleep(1)
         self.click_submit()  # 点击【保存】
-        sleep(1)
+        sleep(3)
         self.click_check(clientname1)  # 点击【查看】
-        sleep(1)
+        sleep(5)
         self.click_alter()  # 点击【修改】
         sleep(1)
         self.input_client('北京东兴阳工程技术有限公司')  # 修改信息
@@ -116,8 +117,8 @@ class NewClient(BasePage):
         sleep(1)
         self.click_back()  # 点击返回
         sleep(1)
-        self.click_select(clientname1)  #勾选选择框
+        self.click_select(clientname1)  # 勾选选择框
         sleep(1)
-        self.click_batch_operation()   #点击批量操作
+        self.click_batch_operation()  # 点击批量操作
         sleep(1)
-        self.click_batch_Remove()  #删除
+        self.click_batch_Remove()  # 删除
