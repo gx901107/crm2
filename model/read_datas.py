@@ -40,3 +40,10 @@ def read_opportunity_excel(filename=None):
     data = xlrd.open_workbook(filename + '/opportunity_data.xls')
     table = data.sheet_by_name('opportunity')
     return [table.row_values(line) for line in range(1, table.nrows)]
+def ReadExcel(sheet,filename=None):
+    if not filename:
+        filename= "../data/mars_data.xlsx"
+        data=xlrd.open_workbook(filename)
+        tanle=data.sheet_by_name(sheet)
+        return tanle.row_values(1)
+
