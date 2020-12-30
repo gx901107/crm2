@@ -34,6 +34,8 @@ class MyTest_a(unittest.TestCase):
         sleep(3)
         self.driver.find_element_by_css_selector('#end_time').send_keys('2020-12-03')
         sleep(1)
+        self.driver.find_element_by_css_selector('#searchForm > ul > li:nth-child(4) > button').click()#搜索
+        sleep(2)
         self.driver.find_element_by_link_text('选择统计内容').click()
         sleep(1)
         self.driver.find_element_by_css_selector('#show_report').click()
