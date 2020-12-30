@@ -20,13 +20,13 @@ socialavatar_locator = (By.CSS_SELECTOR, '/html/body/div[1]/div/div/div[2]/ul[2]
 origanization_locator = (By.LINK_TEXT, '组织架构')  # 组织架构的定位器
 """添加部门相关定位器"""
 adddepartment_locator = (By.ID, 'add_department')  # 添加部门的定位器
-departmentname_locator = (By.ID, 'name')  # 岗位名称定位器
+departmentname_locator = (By.ID, 'name')  # 部门名称定位器
 uperiordepartment_locator = (By.NAME, 'parent_id')  # 上级部门的选择定位器
 departmentnamedescription_locator = (By.CSS_SELECTOR, '#department_add > div:nth-child(3) > div > textarea')  # 部门描述定位器
 confirm_locator = (By.XPATH, '/html/body/div[8]/div[3]/div/button[1]/span')  # 确定按钮
 """添加岗位定位器"""
 addrole_locator = (By.ID, 'add_role')  # 添加岗位定位器
-rolename_locator = (By.NAME, 'name')  # 部门名称定位器
+rolename_locator = (By.NAME, 'name')  # 岗位名称定位器
 fordepartment_locator = (By.NAME, 'department_id')  # 所属部门定位器
 parent_locator = (By.NAME, 'parent_id')  # 上级部门定位器
 roledescription_locator = (By.CSS_SELECTOR, '#role_add > div:nth-child(4) > div > textarea')  # 部门描述定位器

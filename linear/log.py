@@ -48,48 +48,48 @@ sleep(3)
 driver.switch_to.parent_frame()  # 返回上一级frame
 sleep(3)
 driver.find_element(*logsave_locator).click()
-# """查看日志"""
-# sleep(3)
-# logtable_locator = (By.XPATH, '//*[@id="form1"]/table/tbody')  # 日志列表的定位器
-# tr_locator = (By.TAG_NAME, 'tr')
-# td_locator = (By.TAG_NAME, 'td')
-# returepage_locator = (By.LINK_TEXT, '返回上一页')
-# altertitle_locator = (By.CSS_SELECTOR,
-#                       'body > div.container > div.row > div > form > table > tbody > tr:nth-child(2) > td:nth-child(2) > input')
-# altertitlesave_locator = (By.XPATH, '/html/body/div[5]/div[2]/div/form/table/tfoot/tr/td[2]/input[1]')
-# table_element = driver.find_element(*logtable_locator)
-# print(table_element)
-# tr_list = driver.find_elements(*tr_locator)[2:]
-# print(tr_list, len(tr_list))
-# for tr in tr_list:
-#     td_list = tr.find_elements(*td_locator)
-#     print(td_list)
-#     if td_list[2].text == '2020-12-28 工作日志':
-#         td_list[6].find_element_by_css_selector('a:nth-child(1)').click()
-#         sleep(2)
-#         driver.find_element(*returepage_locator).click()
-#         break
-# """编辑日志"""
-# alterreturn_locator=(By.LINK_TEXT,'返回列表页')
-# driver.refresh()
-# table_element = driver.find_element(*logtable_locator)
-# print(table_element)
-# tr_list = driver.find_elements(*tr_locator)[2:]
-# sleep(3)
-# for tr in tr_list:
-#     td_list = tr.find_elements(*td_locator)
-#     print(td_list)
-#     if td_list[2].text == '2020-12-28 工作日志':
-#         sleep(3)
-#         td_list[6].find_element_by_css_selector('a:nth-child(2)').click()
-#         sleep(2)
-#         driver.find_element(*altertitle_locator).clear()
-#         driver.find_element(*altertitle_locator).send_keys("12-28日志")
-#         sleep(2)
-#         driver.find_element(*altertitlesave_locator).click()
-#         sleep(1)
-#         driver.find_element(*alterreturn_locator).click()#点击返回列表
-#         break
+"""查看日志"""
+sleep(3)
+logtable_locator = (By.XPATH, '//*[@id="form1"]/table/tbody')  # 日志列表的定位器
+tr_locator = (By.TAG_NAME, 'tr')
+td_locator = (By.TAG_NAME, 'td')
+returepage_locator = (By.LINK_TEXT, '返回上一页')
+altertitle_locator = (By.CSS_SELECTOR,
+                      'body > div.container > div.row > div > form > table > tbody > tr:nth-child(2) > td:nth-child(2) > input')
+altertitlesave_locator = (By.XPATH, '/html/body/div[5]/div[2]/div/form/table/tfoot/tr/td[2]/input[1]')
+table_element = driver.find_element(*logtable_locator)
+print(table_element)
+tr_list = driver.find_elements(*tr_locator)[2:]
+print(tr_list, len(tr_list))
+for tr in tr_list:
+    td_list = tr.find_elements(*td_locator)
+    print(td_list)
+    if td_list[2].text == '2020-12-28 工作日志':
+        td_list[6].find_element_by_css_selector('a:nth-child(1)').click()
+        sleep(2)
+        driver.find_element(*returepage_locator).click()
+        break
+"""编辑日志"""
+alterreturn_locator=(By.LINK_TEXT,'返回列表页')
+driver.refresh()
+table_element = driver.find_element(*logtable_locator)
+print(table_element)
+tr_list = driver.find_elements(*tr_locator)[2:]
+sleep(3)
+for tr in tr_list:
+    td_list = tr.find_elements(*td_locator)
+    print(td_list)
+    if td_list[2].text == '2020-12-28 工作日志':
+        sleep(3)
+        td_list[6].find_element_by_css_selector('a:nth-child(2)').click()
+        sleep(2)
+        driver.find_element(*altertitle_locator).clear()
+        driver.find_element(*altertitle_locator).send_keys("12-28日志")
+        sleep(2)
+        driver.find_element(*altertitlesave_locator).click()
+        sleep(1)
+        driver.find_element(*alterreturn_locator).click()#点击返回列表
+        break
 
 """搜索"""
 sleep(3)
