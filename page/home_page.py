@@ -252,8 +252,15 @@ class HomePage(BasePage):
         '''点击头像-个人资料-修改个人资料-点击组织架构'''
         self.head_portrait()
         self.my_data_submit()
+        sleep(2)
         self.email_input(email)
+        sleep(2)
         self.phone_input(phone)
+        sleep(2)
         self.save_data_submit()
         self.head_portrait()
         self.organizational_structure_submit()
+    def homepage4(self):
+        '''点击头像-操作日志'''
+        self.head_portrait()
+        self.operation_log_submit()
