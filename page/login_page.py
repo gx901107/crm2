@@ -6,7 +6,7 @@
 # @Project : crm自动化测试
 from selenium.webdriver.common.by import By
 from page.base_page import BasePage
-
+from time import sleep
 class LoginPage(BasePage):
     _url = BasePage._url + '/crm'
 
@@ -20,7 +20,7 @@ class LoginPage(BasePage):
     def input_username(self,username):
         self.find_element(self.username_locator).send_keys(username)
     def input_password(self,password):
-        self.find_element(self.password_locator).send_keys(password)
+        self.find_element(self.password_locator).send_keys(int(password))
     def submit(self):
         self.find_element(self.submit_locator).click()
     def open(self):
