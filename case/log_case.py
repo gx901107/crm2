@@ -9,22 +9,35 @@ from page.home_page import HomePage
 from page.log_page import LogPage
 from case.base_case import BaseCase
 from model.ncread_datas import read_data_excel
-class Log(BaseCase):
-    addlogtile,content,newtitle,keyword,expected=read_data_excel('addlog')[0]
+import unittest
+from page.login_page import LoginPage
+from model.browser import chrome
+
+
+class Log(unittest.TestCase):
+    addlogtile, content, newtitle, keyword, expected = read_data_excel('addlog')[0]
+
+    def setUp(self) -> None:
+        self.driver = chrome()
+        lp = LoginPage(self.driver)
+        lp.login('admin', '123456')
+
     def test_log(self):
-        hp=HomePage(self.driver)
+        hp = HomePage(self.driver)
         hp.more_element()
         sleep(2)
         hp.log_element()
-        lp=LogPage(self.driver)
-        lp.addlog(self.addlogtile,self.content)#新建日志
+        lp = LogPage(self.driver)
+        lp.addlog(self.addlogtile, self.content)  # 新建日志
         sleep(2)
-        lp.cheak_log()#查看日志
+        lp.cheak_log()  # 查看日志
         sleep(2)
-        lp.alter_log(self.newtitle)#编辑日志
+        lp.alter_log(self.newtitle)  # 编辑日志
         sleep(2)
-        lp.search_log(self.keyword)#搜索日志
+        lp.search_log(self.keyword)  # 搜索日志
         sleep(2)
-        lp.delete_log()#删除日志
+        lp.delete_log()  # 删除日志
         sleep(2)
-        self.assertIn('暂无数据！',lp.assert_delete(self.keyword),msg='删除失败')
+        self.assertIn('暂无数据！', lp.assert_delete(self.keyword), msg='删除失败')
+    def tearDown(self) -> None:
+        self.driver.quit()

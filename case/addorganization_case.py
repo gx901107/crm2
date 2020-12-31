@@ -9,11 +9,19 @@ from case.base_case import BaseCase
 from page.home_page import HomePage
 from page.organization1_page import OrPage
 from model.ncread_datas import read_data_excel
+import unittest
+from page.login_page import LoginPage
+from model.browser import chrome
 
+class Organ(unittest.TestCase):
 
-class Organ(BaseCase):
     datas = read_data_excel('addorgan')
     departmentname, index_number, departmentdescription, rolename, branch_id, superiorposition_id, roledescription, email, phone,expected = datas[0]
+
+    def setUp(self) -> None:
+        self.driver = chrome()
+        lp = LoginPage(self.driver)
+        lp.login('admin', '123456')
 
     def test_organ(self):
         hp = HomePage(self.driver)
@@ -28,3 +36,6 @@ class Organ(BaseCase):
         sleep(3)
         op.cheakandalter(self.email,self.phone)
         self.assertIn(self.expected, op.assert_elment(), msg='编辑失败')
+
+    def tearDown(self) -> None:
+        self.driver.quit()
