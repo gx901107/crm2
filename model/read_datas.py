@@ -18,19 +18,19 @@ def read_login_excel(filename=None):
     return [table.row_values(line) for line in range(1, table.nrows)]
 
 
-def read_clue_excel(filename=None):
+def read_clue_excel(sheet,filename=None):
     if not filename:
         filename = DATA_PATH
     data = xlrd.open_workbook(filename + '/clue_data.xls')
-    table = data.sheet_by_name('clue')
+    table = data.sheet_by_name(sheet)
     return [table.row_values(line) for line in range(1, table.nrows)]
 
 
-def read_client_excel(filename=None):
+def read_client_excel(sheet,filename=None):
     if not filename:
         filename = DATA_PATH
     data = xlrd.open_workbook(filename + '/client_data.xls')
-    table = data.sheet_by_name('client')
+    table = data.sheet_by_name(sheet)
     return [table.row_values(line) for line in range(1, table.nrows)]
 
 
@@ -47,5 +47,3 @@ def ReadExcel(sheet,filename=None):
         data=xlrd.open_workbook(filename)
         tanle=data.sheet_by_name(sheet)
         return tanle.row_values(1)
-
-print(read_clue_excel())
