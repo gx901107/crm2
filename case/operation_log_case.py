@@ -15,7 +15,7 @@ class OperationLogCase(unittest.TestCase):
         lp.login(username, password)
         #个人资料-修改个人资料-组织架构-添加架构-添加岗位-操作日志-查询出全部操作日志-删除其中一条操作日志
         hp3=HomePage(self.driver)
-        email,phone=ReadExcel('my_data')
+        email,phone,expected=ReadExcel('my_data')
         hp3.homepage3(email,phone)
         sleep(2)
         #组织架构添加岗位
@@ -29,9 +29,9 @@ class OperationLogCase(unittest.TestCase):
         hp4.alert_submit()
         sleep(2)
         #断言
-        expected = '客户满意度调查'
+        # expected = '成功删除了相关记录'
         actual = olp.assert_agin()
-        self.assertEqual(expected, actual, msg='添加公告失败')
+        self.assertIn(expected, actual, msg='删除操作日志失败')
     def tearDown(self) -> None:
             self.driver.quit()
 

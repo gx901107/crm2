@@ -22,12 +22,12 @@ class WorkTrendCase(unittest.TestCase):
         tp.taskpage()
         hp.alert_submit()
         #断言
-        content=ReadExcel('content')
+        content,expected=ReadExcel('content')
         tp.taskpage1(content)
         sleep(2)
-        expected = '----暂无数据！----'
+        # expected = '----暂无数据！----'
         actual=tp.search_assert()
-        self.assertEqual(expected, actual, msg='删除任务失败')
+        self.assertIn(expected, actual, msg='删除任务失败')
         sleep(2)
     def tearDown(self) -> None:
         self.driver.quit()

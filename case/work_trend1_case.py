@@ -25,11 +25,11 @@ class WorkTrend1Case(unittest.TestCase):
         sp.schedulepage(sname)
         sleep(3)
         #断言
-        content1=ReadExcel('content1')
+        content1,expected =ReadExcel('content1')
         sp.schedulepage1(content1)
-        expected = '----暂无数据！----'
+        # expected = '----暂无数据！----'
         actual=sp.assert_agin()
-        self.assertEqual(expected, actual, msg='删除日程失败')
+        self.assertIn(expected, actual, msg='删除日程失败')
         sleep(2)
     def tearDown(self) -> None:
         self.driver.quit()
