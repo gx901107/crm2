@@ -6,6 +6,7 @@ from page.home_page import HomePage
 from time import sleep
 from page.organization1_page import OrPage
 from page.operation_log_page import OperationLogPage
+from model.ncread_datas import read_data_excel
 class OperationLogCase(unittest.TestCase):
     driver = chrome()
     def test_operation_log_case(self):
@@ -19,6 +20,9 @@ class OperationLogCase(unittest.TestCase):
         hp3.homepage3(email,phone)
         sleep(2)
         #组织架构添加岗位
+        op1=OrPage(self.driver)
+        rolename,branch_id,superiorposition_id,roledescription=read_data_excel('addorgan')[1][3:7]
+        op1.add_role(rolename,branch_id,superiorposition_id,roledescription)
         #点击头像-操作日志
         hp4=HomePage(self.driver)
         hp4.homepage4()
