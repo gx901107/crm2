@@ -26,6 +26,7 @@ class Product1Page(BasePage):
     tr_locator=(By.TAG_NAME,'tr')#tr标签
     td_locator=(By.TAG_NAME,'td')#td标签
     a_locator=(By.TAG_NAME,'a')#a标签
+    affirm_locator=(By.CSS_SELECTOR,'affirm')#断言
     def click_product(self):#产品
         self.find_element(self.product_locator).click()
     def click_any_field(self):#任意字段

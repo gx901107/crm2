@@ -36,7 +36,7 @@ class MyTest_a(unittest.TestCase):
         sleep(3)
         self.driver.find_element_by_name('total_price').send_keys("1234")
         sleep(3)
-        self.driver.find_element_by_css_selector('#name').send_keys('5222134')
+        self.driver.find_element_by_css_selector('#name').send_keys('5987634')
         sleep(3)
         self.driver.find_element_by_name('contacts_name').click()
         sleep(3)

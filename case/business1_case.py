@@ -18,9 +18,14 @@ class test_business1(unittest.TestCase):
 
     def test_2(self):
         Business1Page(self.driver).business1()
+        a = Business1Page(self.driver).trend_analysis()
+        print(a)
+        self.assertIn('趋势分析', a)
 
     def tearDown(self) -> None:
         self.driver.quit()
 
 if __name__ == '__main__':
     unittest.main()
+
+
