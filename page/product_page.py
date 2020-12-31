@@ -18,7 +18,11 @@ class ProductPage(BasePage):
     retail_price_locator=(By.CSS_SELECTOR,'#suggested_price')#建议售价
     cost_price_locator=(By.CSS_SELECTOR,'#cost_price')#成本价
     save_locator=(By.CSS_SELECTOR,'#form1 > table > tfoot > tr > td > input:nth-child(1)')#保存
-
+    table_locator = (By.CSS_SELECTOR, '#form1 > table')  # 表格
+    tr_locator=(By.TAG_NAME,'tr')#tr标签
+    td_locator=(By.TAG_NAME,'td')#td标签
+    a_locator=(By.TAG_NAME,'a')#a标签
+    affirm_locator = (By.CSS_SELECTOR,'body > div.container > div.alert.alert-success')  # 断言
 
     def click_product(self):#产品
         self.find_element(self.product_locator).click()
@@ -36,6 +40,17 @@ class ProductPage(BasePage):
         self.find_element(self.cost_price_locator).send_keys('22')
     def click_save(self):#保存
         self.find_element(self.save_locator).click()
+
+    def assertions_search(self, clientname1):
+        element = self.find_element(self.table_locator)
+        tr_list = self.find_elements(self.tr_locator, element)[2:]
+        for tr in tr_list:
+            td_list = self.find_elements(self.td_locator, tr)
+            if td_list[1].text == clientname1:
+                return td_list[1].text
+    def affirm(self):
+        return self.find_element(self.affirm_locator).text
+
     def product(self,number):
         self.click_product()#产品
         sleep(2)

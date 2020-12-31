@@ -20,7 +20,10 @@ class test_business(unittest.TestCase):
         lp.login('xiaotang', '123456')
 
     def test_1(self):
-        BusinessPage(self.driver).business('23432456')
+        BusinessPage(self.driver).business('98765445')
+        a=BusinessPage(self.driver).successfully()
+        self.assertIn('删除成功',a)
+
     def tearDown(self) -> None:
         self.driver.quit()
 
