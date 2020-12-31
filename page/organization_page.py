@@ -13,6 +13,7 @@ from selenium.webdriver.support.select import Select
 from selenium.webdriver.common.action_chains import ActionChains
 from page.home_page import HomePage
 
+
 class OrganizationPage(BasePage):
     origanization_locator2 = (By.LINK_TEXT, '组织架构')  # 进入组织架构之后的组织架构定位器
     huabei_locator = (By.XPATH, '//*[@id="browser"]/li[2]/ul/li[2]/ul/li[2]/span')  # 华北销售部定位器
@@ -27,7 +28,7 @@ class OrganizationPage(BasePage):
     relations_locator = (By.LINK_TEXT, '上下级关系图')  # 上下关系图定位器
     alterrole_locator = (By.LINK_TEXT, '修改')  # 编辑岗位定位器
     altername_locator = (By.ID, 'name')  # 岗位名称输入框
-    alterrolebutton_locator=(By.XPATH,'/html/body/div[11]/div[3]/div/button[1]')  # 编辑岗位确定按钮定位器
+    alterrolebutton_locator = (By.XPATH, '/html/body/div[11]/div[3]/div/button[1]')  # 编辑岗位确定按钮定位器
     ssleader_locator = (
         By.CSS_SELECTOR,
         '#browser > li > ul > li.collapsable > ul > li:nth-child(2) > ul > li > ul > li > span')  # 销售专员编辑后的定位器
@@ -36,7 +37,7 @@ class OrganizationPage(BasePage):
     usermanagement_locator = (By.LINK_TEXT, '用户管理')  # 用户管理的定位器
     searchuser_locator = (By.CSS_SELECTOR, '#user_form > div:nth-child(1) > ul > li > ul > li > a')  # 按类别查找的定位器
     user_locator = (By.LINK_TEXT, '员工')
-    aserttable_locator = (By.CSS_SELECTOR, '#user_form > div:nth-child(2) > table > tbody')#断言表单
+    aserttable_locator = (By.CSS_SELECTOR, '#user_form > div:nth-child(2) > table > tbody')  # 断言表单
     tr_locator = (By.TAG_NAME, 'tr')
     td_locator = (By.TAG_NAME, 'td')
 
@@ -48,11 +49,11 @@ class OrganizationPage(BasePage):
         """编辑部门确定按钮"""
         self.find_element(self.alterbutton_locator).click()
 
-    def alterpartname_element(self):
+    def alterpartname_element(self, newpartname):
         """编辑部门名称方法"""
         self.find_element(self.alterpartname_locator).clear()
         sleep(3)
-        self.find_element(self.alterpartname_locator).send_keys('西南销售部')
+        self.find_element(self.alterpartname_locator).send_keys(newpartname)
         sleep(3)
 
     def moveto_element(self):
@@ -62,11 +63,11 @@ class OrganizationPage(BasePage):
         self.find_element(self.alter_locator).click()
         sleep(6)
 
-    def alterrole(self):
+    def alterrole(self, newpartname):
         """编辑部门名称"""
         self.moveto_element()
         sleep(2)
-        self.alterpartname_element()
+        self.alterpartname_element(newpartname)
         sleep(2)
         self.alterbutton_element()
 
@@ -89,10 +90,10 @@ class OrganizationPage(BasePage):
         """点击【上下级关系图】"""
         self.find_element(self.relations_locator).click()
 
-    def altername_element(self):
+    def altername_element(self, newrolename):
         """编辑岗位名称（讲专员改为销售小小组长）"""
         self.find_element(self.altername_locator).clear()  # 清除输入框内容
-        self.find_element(self.altername_locator).send_keys('销售小小组长')
+        self.find_element(self.altername_locator).send_keys(newrolename)
 
     def alterrolebutton_element(self):
         """点击编辑岗位保存按钮"""
@@ -103,13 +104,13 @@ class OrganizationPage(BasePage):
         ActionChains(self.driver).move_to_element(self.find_element(self.salesspecialist_locator)).perform()
         self.find_element(self.alterrole_locator).click()  # 点击编辑
 
-    def alter_role(self):
+    def alter_role(self, newrolename):
         """编辑岗位聚合函数"""
         self.relations_element()  # 点击上下级关系图
         sleep(1)
         self.moveto_alterrole()
         sleep(1)
-        self.altername_element()
+        self.altername_element(newrolename)
         sleep(1)
         self.alterrolebutton_element()
         sleep(1)
@@ -150,9 +151,10 @@ class OrganizationPage(BasePage):
         self.searchuser_element()
         sleep(1)
         self.user_element()
+
     def aserttable_element(self):
-        tr_list= self.find_element(self.aserttable_locator).find_elements(*self.tr_locator)
-        lit=[]
+        tr_list = self.find_element(self.aserttable_locator).find_elements(*self.tr_locator)
+        lit = []
         for tr in tr_list:
             td_list = tr.find_elements(*self.td_locator)
             lit.append(td_list[1].text)

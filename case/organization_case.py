@@ -9,7 +9,7 @@ from page.home_page import HomePage
 from time import sleep
 from page.organization_page import OrganizationPage
 class Organization(BaseCase):
-    def test_organization(self):
+    def test_organization(self,rolename,):
         hp=HomePage(self.driver)
         hp.head_portrait()
         sleep(2)
