@@ -9,19 +9,21 @@ from page.knowledge_page import KnowledgePage
 
 from page.home_page  import HomePage
 from case.base_case import BaseCase
+from model.ncread_datas import read_data_excel
 class KnowledgeCase(BaseCase):
+    kntitle,kncontent,newtitle,knkeyword,expected=read_data_excel('addkno')[0]
     def test_knowledge(self):
         hp=HomePage(self.driver)
         hp.more_element()#点击更多
         sleep(1)
         hp.knowlede_element()#点击知识
         kp=KnowledgePage(self.driver)#实例化KnowledgePage
-        kp.addknowledge()
+        kp.addknowledge(self.kntitle,self.kncontent)
         sleep(4)
-        kp.cheakknowledge()
+        kp.cheakknowledge(self.newtitle)
         sleep(2)
-        kp.searchk_element()
+        kp.searchk_element(self.knkeyword)
         sleep(2)
         kp.deletekonwledge()
         sleep(1)
-        self.assertEqual('----暂无数据！----',kp.assertdlete_knoledge(),msg='删除失败')
+        self.assertIn(self.expected,kp.assertdlete_knoledge(self.knkeyword),msg='删除失败')
