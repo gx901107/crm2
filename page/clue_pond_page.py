@@ -32,6 +32,16 @@ class NEWCluePond(BasePage):
     """定位【ok】"""
     ok_locator = (By.CSS_SELECTOR,
                   'body > div:nth-child(11) > div.ui-dialog-buttonpane.ui-widget-content.ui-helper-clearfix > div > button:nth-child(1) > span')
+    """定位线索池列表表格"""
+    table_locator = (By.CSS_SELECTOR, '#form1 > table')
+    """定位表格tr标签"""
+    tr_locator = (By.TAG_NAME, 'tr')
+    """定位td标签"""
+    td_locator = (By.TAG_NAME, 'td')
+    """定位a标签"""
+    a_locator = (By.TAG_NAME, 'a')
+    """断言文本定位"""
+    assert_locator = (By.CSS_SELECTOR, 'body > div.container > div.alert.alert-success')
 
     def click_clue_pond(self):  # 点击线索池
         HomePage(self.driver).click_clue()
@@ -50,25 +60,43 @@ class NEWCluePond(BasePage):
         ct = self.find_element(self.condition_locator)
         Select(ct).select_by_index(3)
 
-    def input_input(self):  # 输入框输入
-        self.find_element(self.input_locator).send_keys('张二')
+    def input_input(self, linkman):  # 输入框输入
+        self.find_element(self.input_locator).send_keys(linkman)
 
     def click_search(self):  # 点击【搜索】按钮
         self.find_element(self.search_locator).click()
 
-    def click_amend(self):  # 点击【修改】按钮
-        self.find_element(self.amend_locator).click()
+    def click_amend(self,linkman):  # 点击【修改】按钮
+        element = self.find_element(self.table_locator)
+        tr_list = self.find_elements(self.tr_locator, element)[2:]
+        for tr in tr_list:
+            td_list = self.find_elements(self.td_locator, tr)
+
+            if td_list[2].text == linkman:
+                self.find_elements(self.a_locator, td_list[9])[2].click()
+                break
 
     def click_back(self):  # 点击【返回】
         self.find_element(self.back_locator).click()
 
-    def click_allocation(self):  # 点击【分配】
-        self.find_element(self.allocation_locator).click()
+    def click_allocation(self,linkman):  # 点击【分配】
+        element = self.find_element(self.table_locator)
+        tr_list = self.find_elements(self.tr_locator, element)[2:]
+        for tr in tr_list:
+            td_list = self.find_elements(self.td_locator, tr)
+
+            if td_list[2].text == linkman:
+                self.find_elements(self.a_locator, td_list[9])[4].click()
+                break
 
     def click_ok(self):  # 点击【ok】
         self.find_element(self.ok_locator).click()
 
-    def clue_pond_flow(self):  # 线索池流程：新建线索（放入线索池） - 搜索（线索池） - 修改 - 返回 - 分配
+    def assert_text(self):  # 获取断言客户名称文本
+        txt = self.find_element(self.assert_locator).text.strip()
+        return txt.splitlines()[1]
+
+    def clue_pond_flow(self, linkman):  # 线索池流程：新建线索（放入线索池） - 搜索（线索池） - 修改 - 返回 - 分配
         self.click_clue_pond()  # 点击线索池
         sleep(1)
         self.click_new_clue()  # 点击新建线索
@@ -76,7 +104,7 @@ class NEWCluePond(BasePage):
         self.click_put_clue_pond()  # 点击放入线索池
         sleep(1)
         nc = NEWClue(self.driver)
-        nc.input_linkman('张二')  # 输入联系人
+        nc.input_linkman(linkman)  # 输入联系人
         sleep(1)
         nc.click_sbmit()  # 点击【保存】
         sleep(1)
@@ -84,14 +112,19 @@ class NEWCluePond(BasePage):
         sleep(1)
         self.select_condition()  # 选择筛选条件
         sleep(1)
-        self.input_input()  # 搜索框输入信息
+        self.input_input(linkman)  # 搜索框输入信息
         sleep(1)
         self.click_search()  # 点击【搜索】
         sleep(1)
-        self.click_amend()  # 点击【修改】
+        self.click_amend(linkman)  # 点击【修改】
         sleep(1)
         self.click_back()  # 点击【返回】
         sleep(1)
-        self.click_allocation()  # 点击【分配】
+        self.click_allocation(linkman)  # 点击【分配】
         sleep(1)
         self.click_ok()  # 点击【ok】
+
+    def clear_data(self):  #清楚数据
+        HomePage(self.driver).click_clue()  #返回线索
+        sleep(1)
+

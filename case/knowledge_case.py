@@ -6,7 +6,6 @@
 # @Project : crm2
 from time import sleep
 from page.knowledge_page import KnowledgePage
-
 from page.home_page  import HomePage
 from model.ncread_datas import read_data_excel
 import unittest

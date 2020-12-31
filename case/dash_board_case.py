@@ -6,9 +6,10 @@ from page.home_page import HomePage
 from time import sleep
 from page.affiche_list_page import AfficheListPage
 class BashBoardCase(unittest.TestCase):
-    driver = chrome()
+
     def test_dash_board_case(self):
         '''登录'''
+        self.driver = chrome()
         lp = LoginPage(self.driver)
         username, password = ReadExcel('login')
         lp.login(username, password)
@@ -18,11 +19,11 @@ class BashBoardCase(unittest.TestCase):
         hp2.homepage2(mname,tname,name)
         sleep(2)
         ap=AfficheListPage(self.driver)
-        title=ReadExcel('affiche')
+        title,expected=ReadExcel('affiche')
         ap.affichelistpage(title)
         sleep(2)
         #断言
-        expected = '客户满意度调查'
+        # expected = '客户满意度调查'
         actual = ap.assert_agin()
         self.assertEqual(expected, actual, msg='添加公告失败')
     def tearDown(self) -> None:

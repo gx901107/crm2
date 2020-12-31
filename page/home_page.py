@@ -36,9 +36,9 @@ class HomePage(BasePage):
     my_task_locator = (By.CSS_SELECTOR,
                        'body > div.container > div.row > div.span3.knowledgecate > div > div.personal-panel > div:nth-child(2) > p:nth-child(4) > a:nth-child(1)')  # 我的任务
     crm_locator = (By.CSS_SELECTOR, '#searchForm > div > ul.list0.pull-left > li:nth-child(3) > a')  # crm动态
-    revert_locator = (By.CSS_SELECTOR, '#anchor_42 > div:nth-child(4) > a')  # 回复
-    response_locator = (By.CSS_SELECTOR, '#content_42')  # 输入回复内容
-    comment_locator = (By.CSS_SELECTOR, '#reply_42 > div > input.btn.btn-primary.submit')  # 点击评论
+    revert_locator = (By.CSS_SELECTOR, '#anchor_1 > div:nth-child(4) > a')  # 回复
+    response_locator = (By.CSS_SELECTOR, '#content_1')  # 输入回复内容
+    comment_locator = (By.CSS_SELECTOR, '#reply_1 > div > input.btn.btn-primary.submit')  # 点击评论
     my_schedule_locator = (By.CSS_SELECTOR,
                            'body > div.container > div.row > div.span3.knowledgecate > div > div.personal-panel > div:nth-child(2) > p:nth-child(4) > a:nth-child(2)')  # 我的日程
     dash_board_locator = (By.CSS_SELECTOR, 'body > div.container > div.page-header > ul > li:nth-child(2) > a')  # 仪表盘
@@ -115,8 +115,8 @@ class HomePage(BasePage):
     def my_task_submit(self):  # 点击我的任务
         self.find_element(self.my_task_locator).click()
 
-    def log_submit(self): #点击日志动态信息
-        self.find_element(self.log_locator).click()
+    # def log_submit(self): #点击日志动态信息
+    #     self.find_element(self.log_locator).click()
     def revert_submit(self): #点击回复
         self.find_element(self.revert_locator).click()
 
@@ -176,10 +176,12 @@ class HomePage(BasePage):
         self.find_element(self.my_data_locator).click()
 
     def email_input(self, email):  # 邮箱号
+        self.find_element(self.email_locator).clear()
         self.find_element(self.email_locator).send_keys(email)
 
     def phone_input(self, phone):  # 手机号
-        self.find_element(self.phone_locator).send_keys(phone)
+        self.find_element(self.phone_locator).clear()
+        self.find_element(self.phone_locator).send_keys(int(phone))
 
     def save_data_submit(self):  # 点击保存 保存个人资料
         self.find_element(self.save_data_locator).click()
@@ -215,11 +217,13 @@ class HomePage(BasePage):
 
     def homepage1(self, response):
         '''选择看crm动态信息-回复日志动态-我的日程'''
-        self.log_submit()
+        self.crm_submit()
         sleep(3)
+        self.last_page_submit()
         self.revert_submit()
         self.response_input(response)
         self.comment_submit()
+        sleep(3)
         self.my_schedule_submit()
 
     def homepage2(self,mname,tname,name):
