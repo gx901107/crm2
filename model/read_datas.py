@@ -48,4 +48,3 @@ def ReadExcel(sheet,filename=None):
         tanle=data.sheet_by_name(sheet)
         return tanle.row_values(1)
 
-print(read_clue_excel())
