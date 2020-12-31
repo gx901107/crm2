@@ -40,8 +40,10 @@ class NewClient(BasePage):
     batch_operation_locator = (By.CSS_SELECTOR, 'body > div.container > div.row > div:nth-child(1) > ul > div > a')
     """批量删除"""
     batch_remove_locator = (By.LINK_TEXT, '批量删除')
+    """回收站"""
+    recycle_bin_locator = (By.CSS_SELECTOR,'body > div.container > p > a:nth-child(13)')
     """断言客户名称定位"""
-    assert_locator = (By.XPATH, '//*[@id="form1"]/table/tbody/tr[1]/td[3]/a/span')
+    assert_locator = (By.CSS_SELECTOR, 'body > div.container > div.alert.alert-success')
 
     def click_new_client(self):  # 点击新建客户按钮
         hp = HomePage(self.driver)
@@ -51,40 +53,44 @@ class NewClient(BasePage):
     def input_client(self, clientname):  # 输入客户名
         self.find_element(self.client_locator).send_keys(clientname)
 
-    def click_clear(self):  # 清楚
+    def click_clear(self):  # 清除
         self.find_element(self.client_locator).clear()
 
     def click_submit(self):  # 点击保存
         self.find_element(self.submit_locator).click()
 
     def click_check(self, clientname1):  # 点击查看
-        # self.find_element(self.check_locator).click()
         element = self.find_element(self.table_locator)
         tr_list = self.find_elements(self.tr_locator, element)[2:]
         for tr in tr_list:
             td_list = self.find_elements(self.td_locator, tr)
-            # print(td_list[11].text)
 
             if td_list[2].text == clientname1:
                 self.find_elements(self.a_locator, td_list[11])[0].click()
                 break
 
-    def click_alter(self):  # 点击修改
+    def click_alter(self):  # 点击【修改】
         self.find_element(self.alter_locator).click()
 
-    def click_compile(self):  # 点击编辑
-        self.find_element(self.compile_locator).click()
-
-    def click_back(self):  # 点击返回
-        self.find_element(self.back_locator).click()
-
-    def click_select(self, clientname1):  # 勾选可选（为删除做准备）
+    def click_compile(self,x,clientname1):  # 点击编辑
         element = self.find_element(self.table_locator)
         tr_list = self.find_elements(self.tr_locator, element)[2:]
         for tr in tr_list:
             td_list = self.find_elements(self.td_locator, tr)
-            # print(td_list[2].text)
+
             if td_list[2].text == clientname1:
+                self.find_elements(self.a_locator, td_list[11])[1].click()
+                break
+
+    def click_back(self):  # 点击【返回】
+        self.find_element(self.back_locator).click()
+
+    def click_select(self, x,clientname1):  # 勾选可选（为删除做准备）
+        element = self.find_element(self.table_locator)
+        tr_list = self.find_elements(self.tr_locator, element)[2:]
+        for tr in tr_list:
+            td_list = self.find_elements(self.td_locator, tr)
+            if td_list[x].text == clientname1:
                 self.find_element(self.select_locator, td_list[0]).click()
                 break
 
@@ -95,8 +101,12 @@ class NewClient(BasePage):
         self.find_element(self.batch_remove_locator).click()
         self.switch_to()
 
+    def click_recycle_bin(self):  #点击回收站
+        self.find_element(self.recycle_bin_locator).click()
+
     def assert_text(self):  # 获取断言客户名称文本
-        return (self.find_element(self.assert_locator).text).strip()
+        txt = (self.find_element(self.assert_locator).text).strip()
+        return txt.splitlines()[1]
 
     def add_client(self, clientname, clientname1):  # 客户流程：新建 - 查看 - 修改 - 编辑 - 返回 - 删除
         self.click_new_client()  # 点击新建客户
@@ -116,12 +126,32 @@ class NewClient(BasePage):
         sleep(1)
         self.click_submit()  # 点击确定
         sleep(1)
-        self.click_compile()  # 点击编辑
+        self.click_compile(2,clientname1)  # 点击编辑
         sleep(1)
         self.click_back()  # 点击返回
         sleep(1)
-        self.click_select(clientname1)  # 勾选选择框
+        self.click_select(2,clientname1)  # 勾选选择框
         sleep(1)
         self.click_batch_operation()  # 点击批量操作
         sleep(1)
         self.click_batch_Remove()  # 删除
+
+    def clear_client_data(self,client):  #删除客户
+        hp = HomePage(self.driver)  #点击客户
+        hp.click_client()
+        sleep(1)
+        self.click_select(2,client)  # 勾选选择框
+        sleep(1)
+        self.click_batch_operation()  # 点击批量操作
+        sleep(1)
+        self.click_batch_Remove()  # 删除
+
+    def clear_recycle_bin(self,client):  #清除回收站数据
+        self.click_recycle_bin()  #点击回收站
+        sleep(1)
+        self.click_select(1,client)  #勾选匹配选项
+        sleep(1)
+        self.click_batch_operation()  #点击批量操作
+        sleep(1)
+        self.click_batch_Remove()  #点击删除
+        sleep(1)
