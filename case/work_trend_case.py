@@ -7,9 +7,10 @@ from time import sleep
 from page.task_page import TaskPage
 
 class WorkTrendCase(unittest.TestCase):
-    driver=chrome()
+
     def test_work_trend(self):
         '''登录'''
+        self.driver = chrome()
         lp=LoginPage(self.driver)
         username,password=ReadExcel('login')
         lp.login(username,password)

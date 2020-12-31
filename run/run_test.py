@@ -9,15 +9,15 @@ import time
 from BeautifulReport import BeautifulReport
 from config.config import REPORT_PATH, CASES_PATH
 
-# suite = unittest.defaultTestLoader.discover(CASES_PATH, 'test_case.py')
-# now_time = time.strftime("%Y%m%d%H%M%S")
-# filename = f'ecshop-report-{now_time}'
-# runner = BeautifulReport(suite)
-# runner.report(description='登录用例自动化测试',
-#               filename=filename,
-#               report_dir=REPORT_PATH)
-discover=unittest.defaultTestLoader.discover("../case","*_case.py")
-BeautifulReport(discover).report(
-    description=u'自动化测试报告',
-    filename=time.strftime("%Y-%m-%d %H_%M_%S")
-)
+suite = unittest.defaultTestLoader.discover(CASES_PATH, '*_case.py')
+now_time = time.strftime("%Y%m%d%H%M%S")
+filename = f'crm-report-{now_time}'
+runner = BeautifulReport(suite)
+runner.report(description='登录用例自动化测试',
+              filename=filename,
+              report_dir=REPORT_PATH)
+# discover=unittest.defaultTestLoader.discover(CASES_PATH,"*_case.py")
+# BeautifulReport(discover).report(
+#     description=u'自动化测试报告',
+#     filename=time.strftime("%Y-%m-%d %H_%M_%S")
+# )

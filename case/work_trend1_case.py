@@ -9,9 +9,10 @@ from page.schedule_page import SchedulePage
 
 
 class WorkTrend1Case(unittest.TestCase):
-    driver = chrome()
+
     def test_work_trend1(self):
         '''登录'''
+        self.driver = chrome()
         lp = LoginPage(self.driver)
         username, password = ReadExcel('login')
         lp.login(username, password)

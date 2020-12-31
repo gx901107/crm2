@@ -10,6 +10,7 @@ from model.browser import chrome
 from page.Business1_page import Business1Page
 from page.login_page import LoginPage
 class test_business1(unittest.TestCase):
+
     def setUp(self) -> None:
         '''前置条件'''
         self.driver = chrome()

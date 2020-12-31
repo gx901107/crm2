@@ -5,7 +5,6 @@
 # @File : organization1_case.py
 # @Project : crm2
 from time import sleep
-from case.base_case import BaseCase
 from page.home_page import HomePage
 from page.organization1_page import OrPage
 from model.ncread_datas import read_data_excel
@@ -39,3 +38,6 @@ class Organ(unittest.TestCase):
 
     def tearDown(self) -> None:
         self.driver.quit()
+
+if __name__ == '__main__':
+    unittest.main()

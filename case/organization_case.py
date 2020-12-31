@@ -4,7 +4,6 @@
 # @Email : 530504026@qq.com
 # @File : organization_case.py
 # @Project : crm2
-from case.base_case import BaseCase
 from page.home_page import HomePage
 from time import sleep
 from page.organization_page import OrganizationPage

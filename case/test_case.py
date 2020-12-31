@@ -8,20 +8,29 @@
 
 import unittest
 from time import sleep
-from case.base_case import BaseCase
+# from case.base_case import BaseCase
+from model.browser import chrome
 from page.client_pond_page import NewClientPond
 from page.clue_page import NEWClue
 from page.client_page import NewClient
 from model.read_datas import read_clue_excel, read_client_excel
 from page.clue_pond_page import NEWCluePond
+from page.login_page import LoginPage
 
 
-class CrmTest(BaseCase):
+class CrmTest(unittest.TestCase):
+
+    def setUp(self) -> None:
+        self.driver = chrome()
+        lp = LoginPage(self.driver)
+        lp.login('xiaoyang','123456')
+
 
     def test_clue(self):  # 流程：添加线索 - 查看 - 修改 - 转换 - 保存
         linkman, linkman1, client, expected = read_clue_excel('clue')[2]
         nc = NEWClue(self.driver)
         nc.add_clue(linkman, linkman1, client)
+        sleep(2)
 
         """断言"""
         clue_text = nc.assert_text()  # 获取文本【添加客户成功！】
@@ -77,5 +86,8 @@ class CrmTest(BaseCase):
         sleep(1)
         nt.clear_recycle_bin(clientname1)  # 清除回收站数据
         sleep(1)
+
+    def tearDown(self) -> None:
+            self.driver.quit()
 if __name__ == '__main__':
     unittest.main()
