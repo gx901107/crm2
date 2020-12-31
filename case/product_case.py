@@ -16,10 +16,13 @@ class test_product(unittest.TestCase):
         lp.login('xiaotang', '123456')
 
     def test_3(self):
-        ProductPage(self.driver).product('234576543')
+        ProductPage(self.driver).product('2300002')
+        a=ProductPage(self.driver).affirm()
+        self.assertIn("产品添加成功！",a)
 
     def tearDown(self) -> None:
         self.driver.quit()
 
 if __name__ == '__main__':
     unittest.main()
+
