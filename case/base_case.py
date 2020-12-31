@@ -7,9 +7,7 @@
 import unittest
 from model.browser import chrome
 from page.login_page import LoginPage
-
 class BaseCase(unittest.TestCase):
-
     def setUp(self) -> None:
         self.driver = chrome()
         lp = LoginPage(self.driver)

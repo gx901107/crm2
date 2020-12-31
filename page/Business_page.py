@@ -35,12 +35,13 @@ class BusinessPage(BasePage):
     contact_time_locator=(By.ID,'nextstep_time')#下次联系时间
     content_locator=(By.ID,'nextstep')#下次联系内容
     overhead_information_locator=(By.ID,'description')#附加信息
-    add_product_locator=(By.CSS_SELECTOR,'#form1 > table > tbody > tr:nth-child(12) > th > input')#添加产品
-    product_option_locator=(By.CSS_SELECTOR,'#data > tr > td:nth-child(1) > input.product_id')#添加产品
-    product_confirmation_locator=(By.CSS_SELECTOR,'body > div:nth-child(22) > div.ui-dialog-buttonpane.ui-widget-content.ui-helper-clearfix > div > button:nth-child(1) > span')#产品确认
+    # add_product_locator=(By.CSS_SELECTOR,'#form1 > table > tbody > tr:nth-child(12) > th > input')#添加产品
+    # product_option_locator=(By.CSS_SELECTOR,'#data > tr:nth-child(1) > td:nth-child(1) > input.product_id')#添加产品
+    # product_confirmation_locator=(By.XPATH,'/html/body/div[13]/div[11]/div/button[1]/span')#产品确认
     save_locator=(By.CSS_SELECTOR,'#form1 > table > tfoot > tr > td > input:nth-child(1)')#保存
     screen_locator=(By.CSS_SELECTOR,'#field')#筛选条件
     search_locator=(By.CSS_SELECTOR,'#dosearch')#搜索
+    screen1_locator = (By.CSS_SELECTOR, '#field')  # 筛选条件
     search1_locator=(By.CSS_SELECTOR,'#dosearch') # 搜索
     examine_locator=(By.CSS_SELECTOR,'#form1 > table > tbody > tr > td:nth-child(12) > a:nth-child(1)')#查看
     return_locator=(By.CSS_SELECTOR,'#tab1 > div.container2.top-pad > div > a:nth-child(3)')#返回
@@ -49,7 +50,7 @@ class BusinessPage(BasePage):
     editors_save_locator=(By.CSS_SELECTOR,'body > div.container > div.row > div > form > table > tfoot > tr > td > input.btn.btn-primary')#保存
     remove_radio_locator=(By.CSS_SELECTOR,'#form1 > table > tbody > tr > td:nth-child(1) > input')#删除单选
     delete_locator=(By.CSS_SELECTOR,'#delete')#删除
-
+    successfully_locator=(By.CSS_SELECTOR,'body > div.container > div.alert.alert-success')#删除成功
 
     def click_business(self):#点击商机
         self.find_element(self.business_locator).click()
@@ -69,14 +70,14 @@ class BusinessPage(BasePage):
         self.find_element(self.customer_confirmation_locator).click()
     def input_amount_business(self):#商机金额
         self.find_element(self.amount_business_locator).send_keys('1234')
-    def input_business_name(self):#商机名
-        self.find_element(self.business_locator).send_keys('2343245')
+    def input_business_name(self,number):#商机名
+        self.find_element(self.business_name_locator).send_keys(number)
     def click_contacts(self):#联系人
         self.find_element(self.contacts_locator).click()
     def click_contact_list(self):#联系人单选
         self.find_element(self.contact_list_locator).click()
     def click_contact_confirmation(self):#联系人确认
-        self.find_element(self.customer_confirmation_locator).click()
+        self.find_element(self.contact_confirmation_locator).click()
     def click_business_type(self):#商机类型
         select = Select(self.find_element(self.business_type_locator))
         select.select_by_index(1)
@@ -98,21 +99,25 @@ class BusinessPage(BasePage):
         self.find_element(self.content_locator).send_keys('不知道')
     def input_overhead_information(self):#附加信息
         self.find_element(self.overhead_information_locator).send_keys('不知道哦')
-    def click_add_product(self):#添加产品
-        self.find_element(self.add_product_locator).click()
-    def click_product_option(self):#选择产品
-        self.find_element(self.product_option_locator).click()
-    def click_product_confirmation(self):#产品确认
-        self.find_element(self.person_confirmation_locator).click()
+    # def click_add_product(self):#添加产品
+    #     self.find_element(self.add_product_locator).click()
+    # def click_product_option(self):#选择产品
+    #     self.find_element(self.product_option_locator).click()
+    # def click_product_confirmation(self):#产品确认
+    #     self.find_element(self.product_confirmation_locator).click()
     def click_save(self):#保存
-        self.find_element(self.state_locator).click()
+        self.find_element(self.save_locator).click()
     def click_screen(self):#筛选条件
         select = Select(self.find_element(self.screen_locator))
         select.select_by_index(1)
     def click_search(self):#搜索
         self.find_element(self.search_locator).click()
+    def click_screen1(self):  # 筛选条件
+        select = Select(self.find_element(self.screen_locator))
+        select.select_by_index(0)
     def click_search1(self):#搜索
         self.find_element(self.search1_locator).click()
+        self.switch_to() #确定警告框
     def click_examine(self):#查看
         self.find_element(self.examine_locator).click()
     def click_return(self):#返回
@@ -120,7 +125,7 @@ class BusinessPage(BasePage):
     def click_compile(self):#编辑
         self.find_element(self.compile_locator).click()
     def input_edit_input(self):#编辑输入
-        self.find_element(self.input_edit_input()).send_keys('200')
+        self.find_element(self.edit_input_locator).send_keys('200')
     def click_editors_save(self):#保存
         self.find_element(self.editors_save_locator).click()
     def click_remove_radio(self):#删除单选
@@ -128,44 +133,84 @@ class BusinessPage(BasePage):
     def click_delete(self):#删除
         self.find_element(self.delete_locator).click()
         self.driver.switch_to.alert.accept()
+    def successfully(self):#删除成功
+        return self.find_element(self.successfully_locator).text
 
-    def business(self):
+    def business(self,number):
         self.click_business()#商机
+        sleep(2)
         self.click_add_business()#添加商机
+        sleep(2)
         self.click_principal()#负责人
+        sleep(2)
         self.click_single_person()#选择负责人
+        sleep(2)
         self.click_person_confirmation()#负责人确认
+        sleep(2)
         self.click_client()#客户
+        sleep(2)
         self.click_customer_radio()#客户单选
+        sleep(2)
         self.click_customer_confirmation()#客户确认
+        sleep(2)
         self.input_amount_business()#商机金额
-        self.input_business_name()#商机名
+        sleep(2)
+        self.input_business_name(number)#商机名
+        sleep(2)
         self.click_contacts()#联系人
+        sleep(2)
         self.click_contact_list()#联系人单选
+        sleep(2)
         self.click_contact_confirmation()#联系人确认
+        sleep(2)
         self.click_business_type()#商机类型
+        sleep(2)
         self.input_street()#街道
+        sleep(2)
         self.click_source_business()#商机来源
+        sleep(2)
         self.click_state()#状态
+        sleep(2)
         self.input_win_rate()#赢单率
+        sleep(2)
         self.input_current_rate()#预计成交价
+        sleep(2)
         self.input_contact_time()#下次联系时间
+        sleep(2)
         self.input_content()#下次联系内容
+        sleep(2)
         self.input_overhead_information()#附加信息
-        self.click_add_product()#添加产品
-        self.click_product_option()#选择产品
-        self.click_product_confirmation()#产品确认
+        sleep(2)
+        # self.click_add_product()#添加产品
+        # sleep(2)
+        # self.click_product_option()#选择产品
+        # sleep(2)
+        # self.click_product_confirmation()#产品确认
+        # sleep(3)
         self.click_save()#保存
+        sleep(3)
         self.click_screen()#筛选条件
+        sleep(2)
         self.click_search()#搜素
+        sleep(2)
+        self.click_screen1()#筛选条件
+        sleep(2)
         self.click_search1()#搜素
+        sleep(2)
         self.click_examine()#查看
+        sleep(2)
         self.click_return()#返回
+        sleep(2)
         self.click_compile()#编辑
+        sleep(2)
         self.input_edit_input()#编辑输入
+        sleep(2)
         self.click_editors_save()#保存
+        sleep(2)
         self.click_remove_radio()#删除单选
+        sleep(2)
         self.click_delete()#删除
+        sleep(2)
 
 
 

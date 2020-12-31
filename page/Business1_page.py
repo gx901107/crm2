@@ -6,7 +6,7 @@
 # @Project : crm2
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
-
+from time import sleep
 from page.base_page import BasePage
 class Business1Page(BasePage):
     '''商机统计页面类'''
@@ -25,7 +25,7 @@ class Business1Page(BasePage):
     day_tendency_locator=(By.CSS_SELECTOR,'#show_day')#趋势分析按日
     week_tendency_locator=(By.CSS_SELECTOR,'#show_week')#趋势分析按周
     month_tendency_locator=(By.CSS_SELECTOR,'#show_month')#趋势分析按月
-
+    trend_analysis_locator=(By.CSS_SELECTOR,'#highcharts-39 > svg > text.highcharts-title')#趋势分析
 
     def click_business(self):#商机
         self.find_element(self.business_locator).click()
@@ -38,9 +38,9 @@ class Business1Page(BasePage):
         select = Select(self.find_element(self.staff_locator))
         select.select_by_index(1)
     def input_start_time(self):#开始时间
-        self.find_element(self.staff_locator).send_keys('2020-12-01')
+        self.find_element(self.start_time_locator).send_keys('2020-12-01')
     def input_end_time(self):#结束时间
-        self.find_element(self.end_time_locator).send_keys('2020-12-03')
+        self.find_element(self.end_time_locator).send_keys('2020-12-31')
     def click_search(self):#搜索
         self.find_element(self.search_locator).click()
     def click_statistical_content(self):#选择统计内容
@@ -57,22 +57,38 @@ class Business1Page(BasePage):
         self.find_element(self.week_tendency_locator).click()
     def click_month_tendency(self):#趋势分析按月
         self.find_element(self.month_tendency_locator).click()
+    def trend_analysis(self):#趋势分析
+        return self.find_element(self.trend_analysis_locator).text
 
     def business1(self):
         self.click_business()#商机
+        sleep(2)
         self.click_statistics()#统计
+        sleep(2)
         self.click_department()#部门
+        sleep(2)
         self.click_staff()#员工
+        sleep(2)
         self.input_start_time()#开始时间
+        sleep(2)
         self.input_end_time()#结束时间
+        sleep(2)
         self.click_search()#搜索
+        sleep(2)
         self.click_statistical_content()#选择统计内容
+        sleep(2)
         self.click_statistical_statement()#商机统计报表
+        sleep(2)
         self.click_sales_funnel()#销售漏斗
+        sleep(2)
         self.click_amount_business()#商机金额
+        sleep(2)
         self.click_day_tendency()#趋势分析按日
+        sleep(2)
         self.click_week_tendency()#趋势分析按周
+        sleep(2)
         self.click_month_tendency()#趋势分析按月
+        sleep(2)
 
 
 

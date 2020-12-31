@@ -36,7 +36,7 @@ class MyTest_a(unittest.TestCase):
         sleep(3)
         self.driver.find_element_by_name('total_price').send_keys("1234")
         sleep(3)
-        self.driver.find_element_by_css_selector('#name').send_keys('576512134')
+        self.driver.find_element_by_css_selector('#name').send_keys('5987634')
         sleep(3)
         self.driver.find_element_by_name('contacts_name').click()
         sleep(3)
@@ -83,9 +83,15 @@ class MyTest_a(unittest.TestCase):
         # select.select_by_index(1)      #为定位赋值
         # sleep(3)
         self.driver.find_element_by_css_selector('#dosearch').click()
-        sleep(1)
+        sleep(3)
+        locator = self.driver.find_element_by_css_selector('#field')  # 定位到请选择筛选条件
+        select = Select(locator)
+        select.select_by_index(0)  # 为请选择筛选条件赋值
+        sleep(3)
         self.driver.find_element_by_css_selector('#dosearch').click()
-        sleep(2)
+        sleep(3)
+        self.driver.switch_to.alert.accept()#确定警告框
+        sleep(1)
         self.driver.find_element_by_css_selector('#form1 > table > tbody > tr > td:nth-child(12) > a:nth-child(1)').click()
         sleep(2)
         self.driver.find_element_by_css_selector('#tab1 > div.container2.top-pad > div > a:nth-child(3)').click()
