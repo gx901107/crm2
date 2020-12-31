@@ -6,7 +6,7 @@
 # @Project : crm2
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
-
+from time import sleep
 from page.base_page import BasePage
 class ProductPage(BasePage):
     '''产品添加页面类'''
@@ -24,8 +24,8 @@ class ProductPage(BasePage):
         self.find_element(self.product_locator).click()
     def click_add_product(self):#添加产品
         self.find_element(self.add_product_locator).click()
-    def input_product_name(self):#产品名称
-        self.find_element(self.product_locator).send_keys('5873')
+    def input_product_name(self,number):#产品名称
+        self.find_element(self.product_name_locator).send_keys(number)
     def input_development_time(self):#研发时间
         self.find_element(self.development_time_locator).send_keys('2020-12-16')
     def input_development_team(self):#开发团队
@@ -36,15 +36,23 @@ class ProductPage(BasePage):
         self.find_element(self.cost_price_locator).send_keys('22')
     def click_save(self):#保存
         self.find_element(self.save_locator).click()
-    def product(self):
+    def product(self,number):
         self.click_product()#产品
+        sleep(2)
         self.click_add_product()#添加产品
-        self.input_product_name()#产品名称
+        sleep(2)
+        self.input_product_name(number)#产品名称
+        sleep(2)
         self.input_development_time()#研发时间
+        sleep(2)
         self.input_development_team()#开发团队
+        sleep(2)
         self.input_retail_price()#建议售价
+        sleep(2)
         self.input_cost_price()#成本价
+        sleep(2)
         self.click_save()#保存
+        sleep(2)
 
 
 

@@ -6,7 +6,7 @@
 # @Project : crm2
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
-
+from time import sleep
 from page.base_page import BasePage
 class Business1Page(BasePage):
     '''商机统计页面类'''
@@ -38,7 +38,7 @@ class Business1Page(BasePage):
         select = Select(self.find_element(self.staff_locator))
         select.select_by_index(1)
     def input_start_time(self):#开始时间
-        self.find_element(self.staff_locator).send_keys('2020-12-01')
+        self.find_element(self.start_time_locator).send_keys('2020-12-01')
     def input_end_time(self):#结束时间
         self.find_element(self.end_time_locator).send_keys('2020-12-03')
     def click_search(self):#搜索
@@ -60,19 +60,33 @@ class Business1Page(BasePage):
 
     def business1(self):
         self.click_business()#商机
+        sleep(2)
         self.click_statistics()#统计
+        sleep(2)
         self.click_department()#部门
+        sleep(2)
         self.click_staff()#员工
+        sleep(2)
         self.input_start_time()#开始时间
+        sleep(2)
         self.input_end_time()#结束时间
+        sleep(2)
         self.click_search()#搜索
+        sleep(2)
         self.click_statistical_content()#选择统计内容
+        sleep(2)
         self.click_statistical_statement()#商机统计报表
+        sleep(2)
         self.click_sales_funnel()#销售漏斗
+        sleep(2)
         self.click_amount_business()#商机金额
+        sleep(2)
         self.click_day_tendency()#趋势分析按日
+        sleep(2)
         self.click_week_tendency()#趋势分析按周
+        sleep(2)
         self.click_month_tendency()#趋势分析按月
+        sleep(2)
 
 
 
