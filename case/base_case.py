@@ -7,13 +7,11 @@
 import unittest
 from model.browser import chrome
 from page.login_page import LoginPage
-
 class BaseCase(unittest.TestCase):
-
     def setUp(self) -> None:
         self.driver = chrome()
         lp = LoginPage(self.driver)
-        lp.login('xiaoyang','123456')
+        lp.login('小杨','123456')
 
     def tearDown(self) -> None:
         self.driver.quit()

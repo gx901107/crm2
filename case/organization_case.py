@@ -8,24 +8,29 @@ from case.base_case import BaseCase
 from page.home_page import HomePage
 from time import sleep
 from page.organization_page import OrganizationPage
+from model.ncread_datas import read_data_excel
+
+
 class Organization(BaseCase):
+    newpartname, newrolename,expected = read_data_excel('editorgan')[0]
+
     def test_organization(self):
-        hp=HomePage(self.driver)
+        hp = HomePage(self.driver)
         hp.head_portrait()
         sleep(2)
         hp.organizational_structure_submit()
         sleep(2)
-        op=OrganizationPage(self.driver)
+        op = OrganizationPage(self.driver)
         op.origanization_element()
         sleep(2)
-        op.alterrole()#编辑部门
+        op.alterrole(self.newpartname)  # 编辑部门
         sleep(2)
-        op.moveto_delete()#删除部门
+        op.moveto_delete()  # 删除部门
         sleep(2)
-        op.alter_role()#编辑岗位
+        op.alter_role(self.newrolename)  # 编辑岗位
         sleep(2)
         op.roledelete_element()
         sleep(2)
         op.searchuser()
         sleep(2)
-        self.assertEqual(2,op.aserttable_element(),msg='测试不通过')
+        self.assertEqual(int(self.expected), op.aserttable_element(), msg='测试不通过')
