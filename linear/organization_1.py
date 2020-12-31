@@ -55,7 +55,7 @@ driver.find_element(*departmentname_locator).send_keys('人事部')  # 输入部
 sleep(2)
 locatot = driver.find_element(*uperiordepartment_locator)
 select = Select(locatot)
-select.select_by_visible_text('--卡卡罗特分公司（深圳）')
+select.select_by_index(6)
 sleep(3)
 driver.find_element(*departmentnamedescription_locator).send_keys('负责人事方面工作')
 sleep(2)
@@ -66,9 +66,9 @@ driver.find_element(*addrole_locator).click()  # 点击添加岗位
 sleep(3)
 driver.find_element(*rolename_locator).send_keys('测试工程师组长')  # 添加岗位名称
 sleep(3)
-locator_element = Select(driver.find_element(*fordepartment_locator)).select_by_visible_text('----技术研发部')  # 选择所属部门
+locator_element = Select(driver.find_element(*fordepartment_locator)).select_by_index(11)  # 选择所属部门
 sleep(3)
-parent_element = Select(driver.find_element(*parent_locator)).select_by_visible_text(' --  -- 技术研发部 | 高级工程师')  # 选择上级岗位
+parent_element = Select(driver.find_element(*parent_locator)).select_by_index(9)  # 选择上级岗位
 sleep(3)
 driver.find_element(*roledescription_locator).send_keys('负责软件质量')  # 填写岗位描述
 sleep(3)
@@ -105,6 +105,9 @@ for tr in tr_list:
         sleep(1)
         break
 
-
+aa_locator=(By.CSS_SELECTOR,'body > div.container > div.row > div:nth-child(1) > div')
+yy=driver.find_element(*aa_locator).text
+print(yy,type(yy))
+print(yy.split('\n')[1])
 
 

@@ -9,7 +9,7 @@ from selenium.webdriver.remote.webelement import WebElement
 
 class BasePage():
     """页面类的基类"""
-    _url = 'http://192.168.1.213'  # 基类url的服务器地址
+    _url = 'http://192.168.0.106'  # 基类url的服务器地址
 
     def __init__(self, driver, url=None):
         self.driver = driver
