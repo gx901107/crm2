@@ -8,6 +8,7 @@ import unittest
 from model.browser import chrome
 from page.login_page import LoginPage
 from page.product1_page import Product1Page
+
 class test_product1(unittest.TestCase):
     def setUp(self) -> None:
         '''前置条件'''
@@ -24,9 +25,6 @@ class test_product1(unittest.TestCase):
         # self.assertEqual(self)
     def tearDown(self) -> None:
         self.driver.quit()
-
-
-
 
 if __name__ == '__main__':
     unittest.main()
