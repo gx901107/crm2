@@ -22,7 +22,6 @@ class test_product1(unittest.TestCase):
         b=a.assertions_search('234576543')
         print(b)
 
-        # self.assertEqual(self)
     def tearDown(self) -> None:
         self.driver.quit()
 

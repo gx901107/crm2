@@ -8,9 +8,10 @@ from page.organization1_page import OrPage
 from page.operation_log_page import OperationLogPage
 from model.ncread_datas import read_data_excel
 class OperationLogCase(unittest.TestCase):
-    driver = chrome()
+
     def test_operation_log_case(self):
         '''登录'''
+        self.driver = chrome()
         lp = LoginPage(self.driver)
         username, password = ReadExcel('login')
         lp.login(username, password)

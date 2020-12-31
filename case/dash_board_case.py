@@ -6,9 +6,10 @@ from page.home_page import HomePage
 from time import sleep
 from page.affiche_list_page import AfficheListPage
 class BashBoardCase(unittest.TestCase):
-    driver = chrome()
+
     def test_dash_board_case(self):
         '''登录'''
+        self.driver = chrome()
         lp = LoginPage(self.driver)
         username, password = ReadExcel('login')
         lp.login(username, password)
