@@ -4,12 +4,11 @@
 # @Email : 530504026@qq.com
 # @File : organization_case.py
 # @Project : crm2
-from case.base_case import BaseCase
 from page.home_page import HomePage
 from time import sleep
 from page.organization_page import OrganizationPage
 from model.ncread_datas import read_data_excel
-from page.organization1_page import OrPage
+from page.addorganization_page import OrPage
 import unittest
 from page.login_page import LoginPage
 from model.browser import chrome

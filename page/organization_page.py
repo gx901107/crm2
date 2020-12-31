@@ -15,6 +15,8 @@ from page.home_page import HomePage
 
 
 class OrganizationPage(BasePage):
+    test_locator=(By.XPATH,'//*[@id="browser"]/li/ul/li[3]/ul/li[3]/ul/li/span')#添加的中级测试工程师
+    renshibu_locator=(By.XPATH,'//*[@id="browser"]/li[2]/ul/li[3]/ul/li[7]/span')
     origanization_locator2 = (By.LINK_TEXT, '组织架构')  # 进入组织架构之后的组织架构定位器
     huabei_locator = (By.XPATH, '//*[@id="browser"]/li[2]/ul/li[2]/ul/li[2]/span')  # 华北销售部定位器
     alterpartname_locator = (By.XPATH, '//*[@id="department_edit"]/div[1]/div/input')  # 编辑部门名称定位器
@@ -159,3 +161,22 @@ class OrganizationPage(BasePage):
             td_list = tr.find_elements(*self.td_locator)
             lit.append(td_list[1].text)
         return len(lit)
+    def moveto1_delete(self):
+        """删除新添加的人事部"""
+        ActionChains(self.driver).move_to_element(self.find_element(self.renshibu_locator)).perform()
+        sleep(3)
+        self.find_element(self.delete_locator).click()
+        sleep(3)
+        self.switch_dissmiss()
+        sleep(2)
+        self.find_element(self.delete_locator).click()
+        self.switch_to()
+    def roledelete1_element(self):
+        ActionChains(self.driver).move_to_element(self.find_element(self.test_locator)).perform()
+        self.find_element(self.deletrrole_locator).click()
+        sleep(2)
+        self.switch_dissmiss()
+        sleep(2)
+        self.find_element(self.deletrrole_locator).click()
+        sleep(3)
+        self.switch_to()

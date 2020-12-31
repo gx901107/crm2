@@ -11,9 +11,11 @@ from selenium.webdriver.common.by import By
 from page.home_page import HomePage
 from selenium.webdriver.support.select import Select
 from page.base_page import BasePage
+from page.organization_page import OrganizationPage
 
 
 class OrPage(BasePage):
+
     """添加部门相关定位器"""
     adddepartment_locator = (By.ID, 'add_department')  # 添加部门的定位器
     departmentname_locator = (By.ID, 'name')  # 部门名称定位器

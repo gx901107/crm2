@@ -4,7 +4,7 @@ from model.browser import chrome
 from model.read_datas import ReadExcel
 from page.home_page import HomePage
 from time import sleep
-from page.organization1_page import OrPage
+from page.addorganization_page import OrPage
 from page.operation_log_page import OperationLogPage
 class OperationLogCase(unittest.TestCase):
     driver = chrome()
