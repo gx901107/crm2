@@ -11,7 +11,7 @@ class BaseCase(unittest.TestCase):
     def setUp(self) -> None:
         self.driver = chrome()
         lp = LoginPage(self.driver)
-        lp.login('xiaoyang','123456')
+        lp.login('admin','123456')
 
     def tearDown(self) -> None:
         self.driver.quit()

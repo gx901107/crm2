@@ -51,7 +51,7 @@ class OrPage(BasePage):
 
     def uperiordepartment_element(self, index_number):
         """选择上一级部门"""
-        Select(self.find_element(self.uperiordepartment_locator)).select_by_index(index_number)
+        Select(self.find_element(self.uperiordepartment_locator)).select_by_index(int(index_number))
 
     def departmentnamedescription_element(self, departmentdescription):
         """岗位描述"""
@@ -66,7 +66,7 @@ class OrPage(BasePage):
         sleep(2)
         self.departmentname_element(departmentname)
         sleep(1)
-        self.uperiordepartment_element(index_number)
+        self.uperiordepartment_element(int(index_number))
         sleep(1)
         self.departmentnamedescription_element(departmentdescription)
         sleep(1)
@@ -84,11 +84,11 @@ class OrPage(BasePage):
 
     def fordepartment_elememt(self, branch_id):
         """选择所属部门"""
-        return Select(self.find_element(self.fordepartment_locator)).select_by_index(branch_id)
+        return Select(self.find_element(self.fordepartment_locator)).select_by_index(int(branch_id))
 
     def parent_element(self, superiorposition_id):
         """选择上级岗位"""
-        return Select(self.find_element(self.parent_locator)).select_by_index(superiorposition_id)
+        return Select(self.find_element(self.parent_locator)).select_by_index(int(superiorposition_id))
 
     def roledescription_element(self, roledescription):
         """填写岗位描述"""
@@ -104,9 +104,9 @@ class OrPage(BasePage):
         sleep(3)
         self.rolename_element(rolename)  # 添加岗位名称
         sleep(1)
-        self.fordepartment_elememt(branch_id)  # 选择所属部门
+        self.fordepartment_elememt(int(branch_id))  # 选择所属部门
         sleep(1)
-        self.parent_element(superiorposition_id)  # 选择上级岗位
+        self.parent_element(int(superiorposition_id))  # 选择上级岗位
         sleep(1)
         self.roledescription_element(roledescription)  # 填写岗位描述
         sleep(1)
@@ -122,7 +122,7 @@ class OrPage(BasePage):
     def wphone_element(self, phone):
         """编辑手机信息"""
         self.find_element(self.wphone_locator).clear()
-        self.find_element(self.wphone_locator).send_keys(phone)
+        self.find_element(self.wphone_locator).send_keys(int(phone))
 
     def wuserconfirm_element(self):
         """点击编辑员工确定按钮"""
@@ -132,7 +132,7 @@ class OrPage(BasePage):
         """点击查看中的编辑"""
         self.find_element(self.wuser_locator).click()
 
-    def cheakandalter(self):
+    def cheakandalter(self,email,phone):
         """查看和编辑员工"""
         userdepartment_element = self.find_element(self.usertable_locator)
         tr_list = self.find_elements(self.tr_locator, userdepartment_element)
@@ -144,12 +144,14 @@ class OrPage(BasePage):
                 sleep(3)
                 self.wuser_element()
                 sleep(1)
-                self.wemail_element()
+                self.wemail_element(email)
                 sleep(1)
-                self.wphone_element()
+                self.wphone_element(int(phone))
                 sleep(1)
                 self.wuserconfirm_element()
                 break
 
     def assert_elment(self):
         return self.find_element(self.assert_locator).text.split('\n')[1]
+
+

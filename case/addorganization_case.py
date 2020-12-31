@@ -13,8 +13,8 @@ from model.ncread_datas import read_data_excel
 
 class Organ(BaseCase):
     datas = read_data_excel('addorgan')
-    
-    email,phone=datas[0]
+    departmentname, index_number, departmentdescription, rolename, branch_id, superiorposition_id, roledescription, email, phone,expected = datas[0]
+
     def test_organ(self):
         hp = HomePage(self.driver)
         hp.head_portrait()
@@ -22,9 +22,9 @@ class Organ(BaseCase):
         hp.organizational_structure_submit()
         sleep(2)
         op = OrPage(self.driver)
-        op.add_departmentnamedescription()
+        op.add_departmentnamedescription(self.departmentname,self.index_number,self.departmentdescription)
         sleep(3)
-        op.add_role()
+        op.add_role(self.rolename,self.branch_id,self.superiorposition_id,self.roledescription)
         sleep(3)
-        op.cheakandalter()
-        self.assertEqual('员工信息修改成功！', op.assert_elment(), msg='编辑失败')
+        op.cheakandalter(self.email,self.phone)
+        self.assertIn(self.expected, op.assert_elment(), msg='编辑失败')

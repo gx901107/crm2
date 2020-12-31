@@ -13,9 +13,5 @@ def read_data_excel(sheetname, filename=None):
         filename = DATA_PATH
     data = xlrd.open_workbook(filename + '/nichao_data.xlsx')
     table = data.sheet_by_name(sheetname)
-    return [table.row_values(line) for line in range(0, table.nrows)]
-
-
-
-aa=read_data_excel('addorgan')
-print(aa)
+    return [table.row_values(line) for line in range(1, table.nrows)]
+print(read_data_excel('addorgan')[1][3:6])
