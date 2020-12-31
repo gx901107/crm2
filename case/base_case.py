@@ -13,6 +13,5 @@ class BaseCase(unittest.TestCase):
         lp = LoginPage(self.driver)
         lp.login('xiaoyang','123456')
 
-
     def tearDown(self) -> None:
         self.driver.quit()

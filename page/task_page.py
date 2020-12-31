@@ -24,12 +24,8 @@ class TaskPage(BasePage):
         self.find_element(self.search_content_locator).send_keys(content)
     def search_submit(self): #点击搜索
         self.find_element(self.search_locator).click()
-
     def search_assert(self):
-        expected = '----暂无数据！----'
-        actual=self.find_element(self.assert_locator).text
-        print(actual)
-        self.assertEqual(expected, actual, msg='删除任务失败')
+        return self.find_element(self.assert_locator).text
     def taskpage(self):
         '''点击全部-查看任务-返回-选择一个任务-删除'''
         self.all_task_submit()
